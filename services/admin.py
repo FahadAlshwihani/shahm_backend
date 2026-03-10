@@ -4,6 +4,7 @@ from .models import (
     Service,
     ServiceAdvisoryPage,
     ServiceAdvisoryRequest,
+    ServiceAdvisoryRequestItem,
     AppointmentSettings,
     AppointmentSlot,
     AppointmentBooking,
@@ -36,11 +37,38 @@ class ServiceAdvisoryPageAdmin(admin.ModelAdmin):
     pass
 
 
+class ServiceAdvisoryRequestItemInline(admin.TabularInline):
+    model = ServiceAdvisoryRequestItem
+    extra = 0
+    readonly_fields = ("service",)
+
+
 @admin.register(ServiceAdvisoryRequest)
 class ServiceAdvisoryRequestAdmin(admin.ModelAdmin):
-    list_display = ("first_name", "last_name", "email", "service", "status", "created_at")
+
+    list_display = (
+        "first_name",
+        "last_name",
+        "email",
+        "get_services",
+        "status",
+        "created_at",
+    )
+
     list_filter = ("status",)
-    search_fields = ("first_name", "last_name", "email")
+
+    search_fields = (
+        "first_name",
+        "last_name",
+        "email",
+    )
+
+    inlines = [ServiceAdvisoryRequestItemInline]
+
+    def get_services(self, obj):
+        return ", ".join([item.service.title_en for item in obj.items.all()])
+
+    get_services.short_description = "Services"
 
 
 @admin.register(AppointmentSettings)

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.utils.text import slugify
 
-from .models import PracticeArea, Service, ServiceAdvisoryPage, ServiceAdvisoryRequest, CareerJob, CareerApplication
+from .models import PracticeArea, Service, ServiceAdvisoryPage, ServiceAdvisoryRequest, CareerJob, CareerApplication, ServiceAdvisoryRequestItem
 from django.utils.text import slugify
 from .client_files import Client, ClientFile
 from services.utils import generate_reference
@@ -139,36 +139,13 @@ class ServiceMiniSerializer(serializers.ModelSerializer):
         fields = ["id", "title_ar", "title_en"]
 
 
-class ServiceAdvisoryRequestSerializer(serializers.ModelSerializer):
+class ServiceAdvisoryRequestItemSerializer(serializers.ModelSerializer):
+
     service = ServiceMiniSerializer(read_only=True)
-    service_id = serializers.PrimaryKeyRelatedField(
-        queryset=Service.objects.all(),
-        source="service",
-        write_only=True
-    )
 
     class Meta:
-        model = ServiceAdvisoryRequest
-        fields = [
-            "id",
-            "title",
-            "first_name",
-            "last_name",
-            "email",
-            "phone",
-            "message",
-            "attachment",
-            "service",
-            "service_id",
-            "status",
-            "created_at",
-        ]
-
-    def create(self, validated_data):
-        obj = super().create(validated_data)
-        obj.reference = generate_reference("service")
-        obj.save()
-        return obj
+        model = ServiceAdvisoryRequestItem
+        fields = ["service"]
 
 
 
@@ -214,3 +191,46 @@ class CareerApplicationSerializer(serializers.ModelSerializer):
         return obj
 
 
+class ServiceAdvisoryRequestSerializer(serializers.ModelSerializer):
+
+    items = ServiceAdvisoryRequestItemSerializer(many=True, read_only=True)
+
+    service_ids = serializers.ListField(
+        child=serializers.IntegerField(),
+        write_only=True
+    )
+
+    class Meta:
+        model = ServiceAdvisoryRequest
+        fields = [
+            "id",
+            "title",
+            "first_name",
+            "last_name",
+            "email",
+            "phone",
+            "message",
+            "attachment",
+            "voice_note",
+            "service_ids",
+            "items",
+            "status",
+            "created_at",
+        ]
+
+    def create(self, validated_data):
+
+        service_ids = validated_data.pop("service_ids", [])
+
+        obj = ServiceAdvisoryRequest.objects.create(**validated_data)
+
+        for sid in service_ids:
+            ServiceAdvisoryRequestItem.objects.create(
+                request=obj,
+                service_id=sid
+            )
+
+        obj.reference = generate_reference("service")
+        obj.save()
+
+        return obj

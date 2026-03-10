@@ -158,6 +158,7 @@ class AdminServiceAdvisoryPageView(APIView):
 
 class SubmitServiceAdvisoryRequest(APIView):
     permission_classes = [AllowAny]
+    parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
         serializer = ServiceAdvisoryRequestSerializer(data=request.data)

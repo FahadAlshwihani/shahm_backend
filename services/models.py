@@ -88,6 +88,9 @@ class Service(models.Model):
     order = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title_en or self.title_ar
+
 class ServiceAdvisoryPage(models.Model):
     title_top_ar = models.CharField(max_length=255, blank=True)
     title_top_en = models.CharField(max_length=255, blank=True)
@@ -108,7 +111,8 @@ class ServiceAdvisoryPage(models.Model):
 
 
 class ServiceAdvisoryRequest(models.Model):
-    title = models.CharField(max_length=50)  # اللقب
+
+    title = models.CharField(max_length=50)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     reference = models.CharField(max_length=50, blank=True, null=True)
@@ -116,17 +120,16 @@ class ServiceAdvisoryRequest(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=30)
 
-    service = models.ForeignKey(
-        Service,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    )
-
     message = models.TextField()
 
     attachment = models.FileField(
         upload_to="service_advisory/",
+        null=True,
+        blank=True
+    )
+
+    voice_note = models.FileField(
+        upload_to="service_advisory/voice/",
         null=True,
         blank=True
     )
@@ -141,6 +144,22 @@ class ServiceAdvisoryRequest(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
+class ServiceAdvisoryRequestItem(models.Model):
+
+    request = models.ForeignKey(
+        ServiceAdvisoryRequest,
+        related_name="items",
+        on_delete=models.CASCADE
+    )
+
+    service = models.ForeignKey(
+        Service,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.request.id} - {self.service.title_en}"
 
 
 class AppointmentSettings(models.Model):
