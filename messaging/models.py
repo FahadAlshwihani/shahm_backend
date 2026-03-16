@@ -11,17 +11,23 @@ class ContactMessage(models.Model):
     name = models.CharField(max_length=150, blank=True)
     subject = models.CharField(max_length=250, blank=True)
     message = models.TextField(blank=True)
-    email = models.EmailField()
-    phone = models.CharField(max_length=50, blank=True)
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="new")
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=50)
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="new"
+    )
     is_read = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Message from {self.name}"
+        display_name = self.name or "Unknown"
+        return f"Message from {display_name}"
 
     class Meta:
         ordering = ["-created_at"]

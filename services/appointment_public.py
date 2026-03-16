@@ -2,7 +2,18 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework import status
-from services.models import AppointmentSlot, AppointmentPage, AppointmentSettings, AppointmentSlot
+from django.utils import timezone
+from django.db import IntegrityError, transaction
+from datetime import datetime
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+
+from services.models import (
+    AppointmentSlot,
+    AppointmentBooking,
+    AppointmentPage,
+    AppointmentSettings,
+)
+
 from services.appointment_cms import (
     AppointmentPageSerializer,
     AppointmentSettingsSerializer,
@@ -18,19 +29,23 @@ from services.appointment import (
 
 
 
-class AvailableAppointmentSlotsView(APIView):
-    def get(self, request):
-        slots = AppointmentSlot.objects.filter(is_available=True)
-        serializer = AppointmentSlotSerializer(slots, many=True)
-        return Response(serializer.data)
-
-
-
 class BookAppointmentView(APIView):
+    permission_classes = [AllowAny]
+    parser_classes = [
+        JSONParser,
+        MultiPartParser,
+        FormParser
+    ]
     def post(self, request):
+
         slot_id = request.data.get("slot")
 
-        # 1️⃣ تأكد أن الموعد موجود ومتاح
+        if not slot_id:
+            return Response(
+                {"detail": "Slot required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         try:
             slot = AppointmentSlot.objects.get(
                 id=slot_id,
@@ -42,22 +57,67 @@ class BookAppointmentView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # 2️⃣ أنشئ الحجز
+        # منع المواعيد الماضية
+        slot_datetime = timezone.make_aware(
+            datetime.combine(slot.date, slot.start_time),
+            timezone.get_current_timezone()
+        )
+
+        if slot_datetime <= timezone.localtime():
+            return Response(
+                {"detail": "This slot has already passed"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # منع double booking
+        if AppointmentBooking.objects.filter(slot=slot).exists():
+            return Response(
+                {"detail": "Slot already booked"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         serializer = AppointmentBookingSerializer(data=request.data)
 
-
         if serializer.is_valid():
-            booking = serializer.save(
-                slot=slot,
-                status="pending"
-            )
-            booking.reference = generate_reference("booking")
-            booking.save()
+            try:
+                with transaction.atomic():
+                    slot = AppointmentSlot.objects.select_for_update().get(
+                        id=slot_id,
+                        is_available=True
+                    )
+
+                    if AppointmentBooking.objects.filter(slot=slot).exists():
+                        return Response(
+                            {"detail": "Slot already booked"},
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+
+                    booking = serializer.save(
+                        slot=slot,
+                        status="pending"
+                    )
+
+                    booking.reference = generate_reference("booking")
+                    booking.save(update_fields=["reference"])
+
+                    slot.is_available = False
+                    slot.save(update_fields=["is_available"])
+
+            except AppointmentSlot.DoesNotExist:
+                return Response(
+                    {"detail": "Slot not available"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            except IntegrityError:
+                return Response(
+                    {"detail": "Slot already booked"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
             return Response(
                 {
                     "booking_id": booking.id,
-                    "message": "Appointment booked, awaiting payment"
+                    "message": "Appointment booked successfully"
                 },
                 status=status.HTTP_201_CREATED
             )
@@ -66,8 +126,6 @@ class BookAppointmentView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
-
-
 
 class PublicAppointmentPageView(APIView):
     permission_classes = [AllowAny]
@@ -93,6 +151,25 @@ class PublicAvailableSlotsView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        slots = AppointmentSlot.objects.filter(is_available=True)
-        serializer = AppointmentSlotSerializer(slots, many=True)
+        period = request.query_params.get("period")
+        date = request.query_params.get("date")
+
+        today = timezone.localdate()
+        now_time = timezone.localtime().time()
+
+        qs = AppointmentSlot.objects.filter(
+            date__gte=today,
+            is_available=True
+        )
+
+        if date:
+            qs = qs.filter(date=date)
+
+        if period in ["morning", "evening"]:
+            qs = qs.filter(shift=period)
+
+        qs = qs.exclude(date=today, start_time__lte=now_time)
+        qs = qs.order_by("date", "start_time")
+
+        serializer = AppointmentSlotSerializer(qs, many=True)
         return Response(serializer.data)

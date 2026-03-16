@@ -163,7 +163,14 @@ class ServiceAdvisoryRequestItem(models.Model):
 
 
 class AppointmentSettings(models.Model):
-    price = models.DecimalField(
+    price_in_person = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+
+    price_online = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         null=True,
@@ -177,35 +184,86 @@ class AppointmentSettings(models.Model):
 
 
 class AppointmentSlot(models.Model):
-    date = models.DateField()
+    SHIFT_TYPES = [
+        ("morning", "Morning"),
+        ("evening", "Evening"),
+    ]
+
+    date = models.DateField(db_index=True)
     start_time = models.TimeField()
     end_time = models.TimeField()
+    shift = models.CharField(max_length=10, choices=SHIFT_TYPES)
     is_available = models.BooleanField(default=True)
 
     class Meta:
         unique_together = ("date", "start_time")
 
+    def __str__(self):
+        return f"{self.date} {self.start_time} - {self.end_time} ({self.shift})"
+
 
 class AppointmentBooking(models.Model):
-    slot = models.ForeignKey(AppointmentSlot, on_delete=models.PROTECT)
+    slot = models.ForeignKey(
+        AppointmentSlot,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     reference = models.CharField(max_length=50, blank=True, null=True)
 
+    title = models.CharField(max_length=50, blank=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
+    visitors = models.PositiveIntegerField(default=1)
+    message = models.TextField(blank=True)
+
+    attachment = models.FileField(
+        upload_to="appointments/files/",
+        null=True,
+        blank=True
+    )
+
+    voice_note = models.FileField(
+        upload_to="appointments/voice/",
+        null=True,
+        blank=True
+    )
 
     status = models.CharField(
         max_length=20,
         choices=[
             ("pending", "Pending"),
-            ("paid", "Paid"),
+            ("confirmed", "Confirmed"),
             ("cancelled", "Cancelled"),
         ],
         default="pending"
     )
 
+    APPOINTMENT_TYPES = [
+        ("in_person", "In Person"),
+        ("online", "Online"),
+    ]
+
+    appointment_type = models.CharField(
+        max_length=20,
+        choices=APPOINTMENT_TYPES,
+        default="in_person"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["slot"],
+                name="unique_slot_booking"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class AppointmentPage(models.Model):

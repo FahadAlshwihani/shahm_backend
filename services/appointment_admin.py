@@ -1,15 +1,24 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+from datetime import datetime, timedelta
+
 from services.models import (
     AppointmentPage,
     AppointmentSettings,
     AppointmentSlot,
     AppointmentBooking,
 )
+
 from services.appointment_cms import (
     AppointmentPageSerializer,
     AppointmentSettingsSerializer,
+)
+
+from services.appointment import (
+    AppointmentSlotSerializer,
+    AppointmentBookingSerializer,
 )
 
 from accounts.permissions import IsEditorOrAbove
@@ -59,7 +68,7 @@ class AdminAppointmentSlotsView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
     def get(self, request):
-        slots = AppointmentSlot.objects.all().order_by("date", "start_time")
+        slots = AppointmentSlot.objects.order_by("date", "start_time")
         serializer = AppointmentSlotSerializer(slots, many=True)
         return Response(serializer.data)
 
@@ -94,9 +103,144 @@ class AdminAppointmentBookingsView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
     def get(self, request):
-        bookings = AppointmentBooking.objects.select_related(
-            "slot"
-        ).order_by("-created_at")
+        bookings = AppointmentBooking.objects.select_related("slot").order_by("-created_at")
 
-        serializer = AppointmentBookingSerializer(bookings, many=True)
+        serializer = AppointmentBookingSerializer(
+            bookings,
+            many=True,
+            context={"request": request}
+        )
         return Response(serializer.data)
+
+
+class AdminGenerateSlotsView(APIView):
+    permission_classes = [IsAuthenticated, IsEditorOrAbove]
+
+    def post(self, request):
+        date_str = request.data.get("date")
+        start_time = request.data.get("start_time")
+        end_time = request.data.get("end_time")
+        shift = request.data.get("shift")
+        duration = int(request.data.get("duration", 60))
+
+        if not date_str or not start_time or not end_time or not shift:
+            return Response(
+                {"detail": "date, start_time, end_time and shift are required"},
+                status=400
+            )
+
+        if shift not in ["morning", "evening"]:
+            return Response(
+                {"detail": "Invalid shift"},
+                status=400
+            )
+
+        try:
+            slot_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            start = datetime.strptime(start_time, "%H:%M").time()
+            end = datetime.strptime(end_time, "%H:%M").time()
+        except ValueError:
+            return Response(
+                {"detail": "Invalid date/time format"},
+                status=400
+            )
+
+        if duration <= 0:
+            return Response(
+                {"detail": "Duration must be greater than zero"},
+                status=400
+            )
+
+        if slot_date < datetime.now().date():
+            return Response(
+                {"detail": "Cannot generate slots in the past"},
+                status=400
+            )
+
+        current = datetime.combine(slot_date, start)
+        end_dt = datetime.combine(slot_date, end)
+
+        if current >= end_dt:
+            return Response(
+                {"detail": "End time must be after start time"},
+                status=400
+            )
+
+        created = []
+        skipped = []
+
+        while current < end_dt:
+            slot_end = current + timedelta(minutes=duration)
+
+            if slot_end > end_dt:
+                break
+
+            exists = AppointmentSlot.objects.filter(
+                date=slot_date,
+                start_time=current.time(),
+            ).exists()
+
+            if exists:
+                skipped.append({
+                    "start_time": current.time(),
+                    "end_time": slot_end.time(),
+                    "shift": shift,
+                    "reason": "duplicate"
+                })
+            else:
+                slot = AppointmentSlot.objects.create(
+                    date=slot_date,
+                    start_time=current.time(),
+                    end_time=slot_end.time(),
+                    shift=shift,
+                    is_available=True
+                )
+                created.append(slot.id)
+
+            current = slot_end
+
+        return Response({
+            "created_slots": created,
+            "skipped_slots": skipped
+        })
+
+class AdminCancelBookingView(APIView):
+    permission_classes = [IsAuthenticated, IsEditorOrAbove]
+
+    def patch(self, request, pk):
+        booking = get_object_or_404(AppointmentBooking, id=pk)
+
+        if booking.status == "cancelled":
+            return Response({"detail": "Booking already cancelled"}, status=400)
+
+        booking.status = "cancelled"
+        booking.save(update_fields=["status"])
+
+        if booking.slot:
+            booking.slot.is_available = True
+            booking.slot.save(update_fields=["is_available"])
+
+        return Response({"status": "cancelled"})
+
+class AdminUpdateBookingStatusView(APIView):
+    permission_classes = [IsAuthenticated, IsEditorOrAbove]
+
+    def patch(self, request, pk):
+        booking = get_object_or_404(AppointmentBooking, id=pk)
+        status_value = request.data.get("status")
+
+        if status_value not in ["pending", "confirmed", "cancelled"]:
+            return Response({"detail": "Invalid status"}, status=400)
+
+        booking.status = status_value
+        booking.save(update_fields=["status"])
+
+        if booking.slot:
+            if status_value == "cancelled":
+                booking.slot.is_available = True
+            else:
+                booking.slot.is_available = False
+
+            booking.slot.save(update_fields=["is_available"])
+
+        return Response({"success": True})

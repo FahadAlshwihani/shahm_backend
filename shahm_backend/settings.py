@@ -1,6 +1,7 @@
 # settings.py
 
 from pathlib import Path
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -100,11 +101,36 @@ AUTH_USER_MODEL = "accounts.User"
 
 
 REST_FRAMEWORK = {
+
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+
     "EXCEPTION_HANDLER": "core.exceptions.custom_exception_handler",
+
     "DEFAULT_PAGINATION_CLASS": "core.pagination.DefaultPagination",
+
+}
+
+
+SIMPLE_JWT = {
+
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+
+    "ROTATE_REFRESH_TOKENS": False,
+
+    "BLACKLIST_AFTER_ROTATION": False,
+
+    "UPDATE_LAST_LOGIN": True,
+
+    "AUTH_HEADER_TYPES": ("Bearer",),
+
 }
 
 
@@ -137,7 +163,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ===========================
 
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Riyadh"
 
 USE_I18N = True
 USE_TZ = True

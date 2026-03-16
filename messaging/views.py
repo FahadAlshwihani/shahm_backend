@@ -1,46 +1,20 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponse
-
-
-
-from settings_app.models import SiteSettings
-from core.permissions import IsAdminOrSuper
-
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponse
-
-
-from settings_app.models import SiteSettings
-from core.permissions import IsAdminOrSuper
-
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponse
 import csv
 
-from .models import (
-    ContactMessage,
-    Subscriber,
-    BroadcastLog,
-    EmailTemplate,
-)
+from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from core.permissions import IsAdminOrSuper
+from settings_app.models import SiteSettings
+
+from .models import ContactMessage, Subscriber, BroadcastLog, EmailTemplate
 from .serializers import (
     ContactMessageSerializer,
     SubscriberSerializer,
     BroadcastLogSerializer,
 )
-from settings_app.models import SiteSettings
-from core.permissions import IsAdminOrSuper
 from .utils import load_smtp_settings, render_email_template
 
 
@@ -52,8 +26,7 @@ class ContactMessageView(APIView):
 
     def post(self, request):
         serializer = ContactMessageSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=400)
+        serializer.is_valid(raise_exception=True)
 
         message = serializer.save()
         load_smtp_settings()
@@ -70,7 +43,7 @@ class ContactMessageView(APIView):
             "admin_alert",
             {
                 "name": message.name,
-                "email": message.email,
+                "email": message.email or "",
                 "phone": message.phone,
                 "subject": message.subject,
                 "message": message.message,
@@ -78,7 +51,7 @@ class ContactMessageView(APIView):
             },
         )
 
-        if subject and html and admin_email:
+        if subject and html and admin_email and sender_email:
             mail = EmailMultiAlternatives(
                 subject=subject,
                 body="",
@@ -88,25 +61,26 @@ class ContactMessageView(APIView):
             mail.attach_alternative(html, "text/html")
             mail.send()
 
-        # Auto reply
-        subject, html = render_email_template(
-            "auto_reply",
-            {
-                "name": message.name,
-                "email": message.email,
-                "site_name": settings.site_name_ar,
-            },
-        )
-
-        if subject and html:
-            mail = EmailMultiAlternatives(
-                subject=subject,
-                body="",
-                from_email=sender_email,
-                to=[message.email],
+        # Auto reply only if email exists
+        if message.email:
+            subject, html = render_email_template(
+                "auto_reply",
+                {
+                    "name": message.name,
+                    "email": message.email,
+                    "site_name": settings.site_name_ar,
+                },
             )
-            mail.attach_alternative(html, "text/html")
-            mail.send()
+
+            if subject and html and sender_email:
+                mail = EmailMultiAlternatives(
+                    subject=subject,
+                    body="",
+                    from_email=sender_email,
+                    to=[message.email],
+                )
+                mail.attach_alternative(html, "text/html")
+                mail.send()
 
         return Response({"success": True})
 
@@ -169,139 +143,13 @@ class AdminSingleMessageView(APIView):
 
     def get(self, request, pk):
         try:
-            msg = ContactMessage.objects.get(pk=pk)
-        except ContactMessage.DoesNotExist:
-            return Response({"detail": "Not found"}, status=404)
-
-        if not msg.is_read:
-            msg.is_read = True
-            msg.save()
-
-        return Response(ContactMessageSerializer(msg).data)
-
-
-# =========================
-# Subscribers
-# =========================
-class SubscribersListView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request):
-        qs = Subscriber.objects.all()
-        return Response(SubscriberSerializer(qs, many=True).data)
-
-
-class SubscriberDeleteView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def delete(self, request, pk):
-        Subscriber.objects.filter(pk=pk).delete()
-        return Response({"success": True})
-
-
-class ExportSubscribersCSV(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request):
-        response = HttpResponse(content_type="text/csv")
-        response["Content-Disposition"] = "attachment; filename=subscribers.csv"
-        writer = csv.writer(response)
-        writer.writerow(["Email", "Created At"])
-        for s in Subscriber.objects.all():
-            writer.writerow([s.email, s.created_at])
-        return response
-
-
-# =========================
-# Broadcast
-# =========================
-class BroadcastEmailView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def post(self, request):
-        subject = request.data.get("subject")
-        html = request.data.get("html")
-
-        if not subject or not html:
-            return Response({"error": "Missing fields"}, status=400)
-
-        load_smtp_settings()
-        settings = SiteSettings.objects.first()
-        sender = settings.auto_reply_email
-
-        emails = Subscriber.objects.values_list("email", flat=True)
-        sent = 0
-
-        for email in emails:
-            mail = EmailMultiAlternatives(
-                subject=subject,
-                body="",
-                from_email=sender,
-                to=[email],
-            )
-            mail.attach_alternative(html, "text/html")
-            mail.send()
-            sent += 1
-
-        BroadcastLog.objects.create(
-            subject=subject,
-            html=html,
-            recipients_count=sent,
-            recipients_list="\n".join(emails),
-        )
-
-        return Response({"success": True, "sent": sent})
-
-
-class BroadcastLogsListView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request):
-        qs = BroadcastLog.objects.all()
-        return Response(BroadcastLogSerializer(qs, many=True).data)
-
-
-# =========================
-# Email Templates (Admin)
-# =========================
-class EmailTemplateView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request):
-        return Response([
-            {
-                "template_type": t.template_type,
-                "subject": t.subject,
-                "html_content": t.html_content,
-            }
-            for t in EmailTemplate.objects.all()
-        ])
-
-    def post(self, request):
-        EmailTemplate.objects.update_or_create(
-            template_type=request.data["template_type"],
-            defaults={
-                "subject": request.data.get("subject", ""),
-                "html_content": request.data["html_content"],
-            },
-        )
-        return Response({"success": True})
-
-# =========================
-# Admin Single Message
-# =========================
-class AdminSingleMessageView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request, pk):
-        try:
             message = ContactMessage.objects.get(id=pk)
         except ContactMessage.DoesNotExist:
             return Response({"detail": "Not found"}, status=404)
 
         if not message.is_read:
             message.is_read = True
-            message.save()
+            message.save(update_fields=["is_read"])
 
         serializer = ContactMessageSerializer(message)
         return Response(serializer.data)
@@ -313,18 +161,17 @@ class AdminSingleMessageView(APIView):
             return Response({"detail": "Not found"}, status=404)
 
         serializer = ContactMessageSerializer(
-            message, data=request.data, partial=True
+            message,
+            data=request.data,
+            partial=True
         )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(serializer.errors, status=400)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 
 # =========================
-# Admin Subscribers List
+# Subscribers
 # =========================
 class SubscribersListView(APIView):
     permission_classes = [IsAdminOrSuper]
@@ -335,9 +182,6 @@ class SubscribersListView(APIView):
         return Response(serializer.data)
 
 
-# =========================
-# Admin Delete Subscriber
-# =========================
 class SubscriberDeleteView(APIView):
     permission_classes = [IsAdminOrSuper]
 
@@ -350,9 +194,6 @@ class SubscriberDeleteView(APIView):
             return Response({"error": "Subscriber not found"}, status=404)
 
 
-# =========================
-# Export Subscribers CSV
-# =========================
 class ExportSubscribersCSV(APIView):
     permission_classes = [IsAdminOrSuper]
 
@@ -383,7 +224,6 @@ class BroadcastEmailView(APIView):
         if not subject or not html_content:
             return Response({"error": "Missing fields"}, status=400)
 
-        # تحميل SMTP
         load_smtp_settings()
 
         settings = SiteSettings.objects.first()
@@ -391,10 +231,10 @@ class BroadcastEmailView(APIView):
 
         if not sender:
             return Response(
-                {"error": "Missing sender email in settings"}, status=500
+                {"error": "Missing sender email in settings"},
+                status=500
             )
 
-        # اختيار المستلمين
         if subscriber_ids:
             qs = Subscriber.objects.filter(id__in=subscriber_ids)
         else:
@@ -417,7 +257,6 @@ class BroadcastEmailView(APIView):
             except Exception as e:
                 print(f"Email error for {email}: {e}")
 
-        # حفظ سجل الإرسال
         BroadcastLog.objects.create(
             subject=subject,
             html=html_content,
@@ -428,9 +267,6 @@ class BroadcastEmailView(APIView):
         return Response({"success": True, "sent": sent})
 
 
-# =========================
-# Broadcast Logs List
-# =========================
 class BroadcastLogsListView(APIView):
     permission_classes = [IsAdminOrSuper]
 
@@ -438,3 +274,30 @@ class BroadcastLogsListView(APIView):
         logs = BroadcastLog.objects.all()
         serializer = BroadcastLogSerializer(logs, many=True)
         return Response(serializer.data)
+
+
+# =========================
+# Email Templates (Admin)
+# =========================
+class EmailTemplateView(APIView):
+    permission_classes = [IsAdminOrSuper]
+
+    def get(self, request):
+        return Response([
+            {
+                "template_type": t.template_type,
+                "subject": t.subject,
+                "html_content": t.html_content,
+            }
+            for t in EmailTemplate.objects.all()
+        ])
+
+    def post(self, request):
+        EmailTemplate.objects.update_or_create(
+            template_type=request.data["template_type"],
+            defaults={
+                "subject": request.data.get("subject", ""),
+                "html_content": request.data["html_content"],
+            },
+        )
+        return Response({"success": True})

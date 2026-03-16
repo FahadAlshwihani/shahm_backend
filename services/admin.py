@@ -73,7 +73,7 @@ class ServiceAdvisoryRequestAdmin(admin.ModelAdmin):
 
 @admin.register(AppointmentSettings)
 class AppointmentSettingsAdmin(admin.ModelAdmin):
-    list_display = ("price", "slot_duration", "is_active")
+    list_display = ["price_in_person", "price_online", "slot_duration", "is_active"]
 
 
 @admin.register(AppointmentSlot)

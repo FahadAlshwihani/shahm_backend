@@ -1,11 +1,14 @@
 from django.urls import path
+
 from services.appointment_admin import (
     AdminAppointmentPageView,
     AdminAppointmentSettingsView,
     AdminAppointmentSlotsView,
     AdminAppointmentSlotDetailView,
     AdminAppointmentBookingsView,
-
+    AdminGenerateSlotsView,
+    AdminCancelBookingView,
+    AdminUpdateBookingStatusView,
 )
 
 from services.client_views import AdminClientsView, AdminClientFilesView
@@ -14,6 +17,7 @@ from services.appointment_public import (
     PublicAppointmentPageView,
     PublicAppointmentSettingsView,
     PublicAvailableSlotsView,
+    BookAppointmentView,
 )
 
 
@@ -155,11 +159,22 @@ path(
     AdminAppointmentSettingsView.as_view()
 ),
 
+path(
+    "public/appointments/book/",
+    BookAppointmentView.as_view()
+),
+
 
 # ADMIN
 path("admin/appointments/slots/", AdminAppointmentSlotsView.as_view()),
 path("admin/appointments/slots/<int:pk>/", AdminAppointmentSlotDetailView.as_view()),
 path("admin/appointments/bookings/", AdminAppointmentBookingsView.as_view()),
+path("admin/appointments/slots/generate/", AdminGenerateSlotsView.as_view()),
+path("admin/appointments/bookings/<int:pk>/cancel/", AdminCancelBookingView.as_view()),
+path(
+    "admin/appointments/bookings/<int:pk>/status/",
+    AdminUpdateBookingStatusView.as_view()
+),
 
 
      path("admin/clients/", AdminClientsView.as_view()),
