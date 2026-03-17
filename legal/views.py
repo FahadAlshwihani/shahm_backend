@@ -1,80 +1,92 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import status
+from django.shortcuts import get_object_or_404
 
 from .models import LegalPage
-from .serializers import LegalPageSerializer
-from accounts.permissions import IsEditorOrAbove, IsAdminOrSuper
+from .serializers import LegalPageSerializer, PublicLegalPageSerializer
+from accounts.permissions import IsEditorOrAbove
 
 
-# ------------------------------------
-# Public: عرض صفحة قانونية
-# ------------------------------------
 class PublicLegalPageView(APIView):
+
     permission_classes = [AllowAny]
 
     def get(self, request, slug):
-        try:
-            page = LegalPage.objects.get(slug=slug, is_published=True)
-        except LegalPage.DoesNotExist:
-            return Response({"detail": "Page not found"}, status=404)
 
-        serializer = LegalPageSerializer(page)
+        page = get_object_or_404(
+            LegalPage.objects.prefetch_related("sections"),
+            slug=slug,
+            is_published=True
+        )
+
+        serializer = PublicLegalPageSerializer(page)
+
         return Response(serializer.data)
 
 
-# ------------------------------------
-# Dashboard: إدارة الصفحات القانونية
-# ------------------------------------
-
 class LegalPageListCreateView(APIView):
-    # Editor + Admin + Super Admin
+
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
     def get(self, request):
-        pages = LegalPage.objects.all()
+
+        pages = LegalPage.objects.prefetch_related("sections")
+
         serializer = LegalPageSerializer(pages, many=True)
+
         return Response(serializer.data)
 
     def post(self, request):
+
         serializer = LegalPageSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data, status=201)
 
 
 class LegalPageDetailView(APIView):
+
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
+    def get_object(self, pk):
+
+        return get_object_or_404(
+            LegalPage.objects.prefetch_related("sections"),
+            pk=pk
+        )
+
     def get(self, request, pk):
-        try:
-            page = LegalPage.objects.get(id=pk)
-        except LegalPage.DoesNotExist:
-            return Response({"detail": "Page not found"}, status=404)
+
+        page = self.get_object(pk)
 
         serializer = LegalPageSerializer(page)
+
         return Response(serializer.data)
 
     def patch(self, request, pk):
-        try:
-            page = LegalPage.objects.get(id=pk)
-        except LegalPage.DoesNotExist:
-            return Response({"detail": "Page not found"}, status=404)
 
-        serializer = LegalPageSerializer(page, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+        page = self.get_object(pk)
 
-        return Response(serializer.errors, status=400)
+        serializer = LegalPageSerializer(
+            page,
+            data=request.data,
+            partial=True
+        )
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data)
 
     def delete(self, request, pk):
-        try:
-            page = LegalPage.objects.get(id=pk)
-        except LegalPage.DoesNotExist:
-            return Response({"detail": "Page not found"}, status=404)
+
+        page = self.get_object(pk)
 
         page.delete()
+
         return Response(status=204)
