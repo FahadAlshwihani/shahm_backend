@@ -49,6 +49,27 @@ from .views import (
 
     PublicPageContentView,
     AdminPageContentView,
+    FooterSettingsView,
+    FooterCTAListCreateView,
+    FooterCTADetailView,
+    PublicFooterSettingsView,
+    FAQCategoryListCreateView,
+    FAQCategoryDetailView,
+
+    PublicAboutView,
+    AdminAboutView,
+
+    AdminAboutStatListCreateView,
+    AdminAboutStatDetailView,
+    AdminAboutPostListCreateView,
+    AdminAboutPostDetailView,
+    AdminAboutSectionListCreateView,
+    AdminAboutSectionDetailView,
+    AdminAboutIconListCreateView,
+    AdminAboutIconDetailView,
+    AdminAboutPartnerListCreateView,
+    AdminAboutPartnerDetailView,
+
 )
 
 urlpatterns = [
@@ -59,7 +80,7 @@ urlpatterns = [
     path("public/home/", PublicHomeView.as_view()),
     path("public/header/", PublicHeaderView.as_view()),
     path("public/search/", public_search),
-
+    path("public/about/", PublicAboutView.as_view()),
 
     # ------------------- Hero -------------------
     path("admin/heroes/", HeroListCreateView.as_view()),
@@ -97,10 +118,11 @@ urlpatterns = [
     # Contact Page
     path("public/contact-page/", PublicContactPageView.as_view()),
 
-
     # Contact Page Header
     path("admin/contact/page/", ContactPageSettingsAdminView.as_view()),
 
+    path("admin/faq-categories/", FAQCategoryListCreateView.as_view()),
+    path("admin/faq-categories/<int:pk>/", FAQCategoryDetailView.as_view()),
 
     path("admin/contact/faq-preview/", ContactFAQPreviewView.as_view()),
     path("admin/contact/faq-preview/toggle/", ContactFAQPreviewToggleView.as_view()),
@@ -108,8 +130,30 @@ urlpatterns = [
     path("admin/contact/cards/", ContactCardListCreateView.as_view()),
     path("admin/contact/cards/<int:pk>/", ContactCardDetailView.as_view()),
 
-    path("public/<slug:slug>/", PublicPageContentView.as_view()),
-    path("admin/<slug:slug>/", AdminPageContentView.as_view()),
+    path("admin/about/", AdminAboutView.as_view()),
 
+    path("admin/about/stats/", AdminAboutStatListCreateView.as_view()),
+    path("admin/about/stats/<int:pk>/", AdminAboutStatDetailView.as_view()),
+
+    path("admin/about/posts/", AdminAboutPostListCreateView.as_view()),
+    path("admin/about/posts/<int:pk>/", AdminAboutPostDetailView.as_view()),
+
+    path("admin/about/sections/", AdminAboutSectionListCreateView.as_view()),
+    path("admin/about/sections/<int:pk>/", AdminAboutSectionDetailView.as_view()),
+
+    path("admin/about/icons/", AdminAboutIconListCreateView.as_view()),
+    path("admin/about/icons/<int:pk>/", AdminAboutIconDetailView.as_view()),
+
+    path("admin/about/partners/", AdminAboutPartnerListCreateView.as_view()),
+    path("admin/about/partners/<int:pk>/", AdminAboutPartnerDetailView.as_view()),
+
+    path("public/content/<slug:slug>/", PublicPageContentView.as_view()),
+    path("admin/page-content/<slug:slug>/", AdminPageContentView.as_view()),
+
+    path("admin/footer/settings/", FooterSettingsView.as_view()),
+    path("admin/footer/cta/", FooterCTAListCreateView.as_view()),
+    path("admin/footer/cta/<int:pk>/", FooterCTADetailView.as_view()),
+
+    path("public/footer/settings/", PublicFooterSettingsView.as_view()),
 
 ]

@@ -20,9 +20,15 @@ from cms.serializers import (
 )
 from cms.views import PublicHomeView
 
-# Services
-from services.models import PracticeArea, Service
-from services.serializers import PracticeAreaSerializer
+from services.models import (
+    MainService,
+    Service,
+)
+
+from services.serializers import (
+    MainServiceSerializer,
+    ServiceSerializer,
+)
 
 # Blog
 from blog.models import BlogPost
@@ -50,7 +56,6 @@ from core.models import Visit
 from core.permissions import IsAdminOrSuper
 
 
-
 # ---------------------------------------------------------
 # 1) Site Settings
 # ---------------------------------------------------------
@@ -60,7 +65,6 @@ class PublicSiteSettingsView(APIView):
     def get(self, request):
         settings = SiteSettings.objects.first()
         return Response(SiteSettingsSerializer(settings).data)
-
 
 
 # ---------------------------------------------------------
@@ -76,7 +80,6 @@ class PublicHeroView(APIView):
             return Response({"detail": "Not found"}, status=404)
 
         return Response(HeroSectionSerializer(hero, context={"request": request}).data)
-
 
 
 # ---------------------------------------------------------
@@ -155,13 +158,13 @@ class PublicFooterView(APIView):
         if "أرغب في تلقّي كل جديد من أخبار شهم" in col_dict:
             col_dict["أرغب في تلقّي كل جديد من أخبار شهم"]["links"] = []
 
-
         # =======================
         # Final response
         # =======================
         return Response(
             sorted(col_dict.values(), key=lambda x: x["order"])
         )
+
 
 # ---------------------------------------------------------
 # 4) Dynamic CMS Page
@@ -186,7 +189,6 @@ class PublicPageView(APIView):
         })
 
 
-
 # ---------------------------------------------------------
 # 5) Legal Pages
 # ---------------------------------------------------------
@@ -208,29 +210,6 @@ class PublicLegalPageView(APIView):
             "seo": PageSEOSerializer(seo).data if seo else None,
             "page": LegalPageSerializer(page, context={"request": request}).data,
         })
-
-
-
-# ---------------------------------------------------------
-# 6) Services
-# ---------------------------------------------------------
-class PublicPracticeAreasView(APIView):
-    permission_classes = [AllowAny]
-
-    def get(self, request):
-        areas = PracticeArea.objects.filter(is_active=True).order_by("order")
-        return Response(PracticeAreaSerializer(areas, many=True, context={"request": request}).data)
-
-
-class PublicPracticeAreaDetailView(APIView):
-    permission_classes = [AllowAny]
-
-    def get(self, request, slug):
-        try:
-            area = PracticeArea.objects.get(slug=slug, is_active=True)
-        except PracticeArea.DoesNotExist:
-            return Response({"detail": "Not found"}, status=404)
-        return Response(PracticeAreaSerializer(area, context={"request": request}).data)
 
 
 # ---------------------------------------------------------
@@ -282,7 +261,6 @@ class PublicBlogDetailView(APIView):
         )
 
 
-
 # ---------------------------------------------------------
 # 8) Team
 # ---------------------------------------------------------
@@ -292,7 +270,6 @@ class PublicTeamView(APIView):
     def get(self, request):
         team = TeamMember.objects.filter(is_active=True).order_by("order")
         return Response(TeamMemberSerializer(team, many=True).data)
-
 
 
 # ---------------------------------------------------------
@@ -314,7 +291,6 @@ class PublicSEOView(APIView):
         return Response(DefaultSEOSerializer(default).data if default else {})
 
 
-
 # ---------------------------------------------------------
 # 10) Header Menu
 # ---------------------------------------------------------
@@ -334,7 +310,6 @@ class PublicHeaderView(APIView):
         return Response(ser.data)
 
 
-
 # ---------------------------------------------------------
 # 11) Dashboard Stats
 # ---------------------------------------------------------
@@ -342,7 +317,6 @@ class DashboardStatsView(APIView):
     permission_classes = [IsAuthenticated, IsAdminOrSuper]
 
     def get(self, request):
-
         now = timezone.now()
         start_today = now.replace(hour=0, minute=0, second=0, microsecond=0)
 
@@ -367,7 +341,7 @@ class DashboardStatsView(APIView):
         latest_subscribers = Subscriber.objects.order_by("-created_at")[:5]
 
         published_posts = BlogPost.objects.filter(status="published").count()
-        total_practice = PracticeArea.objects.count()
+        total_main_services = MainService.objects.count()
         total_services = Service.objects.count()
 
         return Response({
@@ -388,19 +362,19 @@ class DashboardStatsView(APIView):
                 "top_pages": list(top_pages),
             },
             "messages": {
-                "total": total_messages,
-                "unread": unread_messages,
-                "latest": [
-                    {
-                        "id": m.id,
-                        "name": m.name,
-                        "email": m.email,
-                        "subject": m.subject,
-                        "created_at": m.created_at,
-                    }
-                    for m in latest_messages
-                ],
-            },
+    "total": total_messages,
+    "unread": unread_messages,
+    "latest": [
+        {
+            "id": m.id,
+            "phone": m.phone,
+            "status": m.status,
+            "is_read": m.is_read,
+            "created_at": m.created_at,
+        }
+        for m in latest_messages
+    ],
+},
             "subscribers": {
                 "total": total_subscribers,
                 "latest": [
@@ -416,7 +390,7 @@ class DashboardStatsView(APIView):
                 "published_posts": published_posts,
             },
             "services": {
-                "practice_areas": total_practice,
+                "main_services": total_main_services,
                 "services": total_services,
             }
         })

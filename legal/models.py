@@ -3,7 +3,6 @@ from django.utils.text import slugify
 
 
 class LegalPage(models.Model):
-
     slug = models.SlugField(unique=True)
 
     title_ar = models.CharField(max_length=200)
@@ -28,12 +27,10 @@ class LegalPage(models.Model):
         ordering = ["order"]
 
     def save(self, *args, **kwargs):
-
         if not self.slug:
-            self.slug = slugify(self.title_en or self.title_ar)
+            self.slug = slugify(self.title_en or self.title_ar) or "legal-page"
 
-        self.slug = slugify(self.slug)
-
+        self.slug = slugify(self.slug) or "legal-page"
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -41,18 +38,15 @@ class LegalPage(models.Model):
 
 
 class LegalSection(models.Model):
-
     page = models.ForeignKey(
         LegalPage,
         related_name="sections",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        db_index=True
     )
 
     title_ar = models.CharField(max_length=255)
     title_en = models.CharField(max_length=255)
-
-    content_ar = models.TextField(blank=True)
-    content_en = models.TextField(blank=True)
 
     anchor = models.SlugField(blank=True)
 
@@ -63,16 +57,14 @@ class LegalSection(models.Model):
         unique_together = ["page", "anchor"]
 
     def save(self, *args, **kwargs):
-
         if not self.anchor:
-            base = slugify(self.title_en or self.title_ar)
-
+            base = slugify(self.title_en or self.title_ar) or "section"
             anchor = base
             counter = 1
 
             while LegalSection.objects.filter(
-                page=self.page,
-                anchor=anchor
+                    page=self.page,
+                    anchor=anchor
             ).exclude(pk=self.pk).exists():
                 anchor = f"{base}-{counter}"
                 counter += 1
@@ -83,3 +75,26 @@ class LegalSection(models.Model):
 
     def __str__(self):
         return f"{self.page.slug} - {self.anchor}"
+
+
+class LegalSubSection(models.Model):
+    section = models.ForeignKey(
+        LegalSection,
+        related_name="subsections",
+        on_delete=models.CASCADE,
+        db_index=True
+    )
+
+    title_ar = models.CharField(max_length=255)
+    title_en = models.CharField(max_length=255)
+
+    content_ar = models.TextField(blank=True)
+    content_en = models.TextField(blank=True)
+
+    order = models.PositiveIntegerField(default=0, db_index=True)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.title_en or self.title_ar

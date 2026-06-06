@@ -79,7 +79,6 @@ class AdminAppointmentSlotsView(APIView):
         return Response(serializer.data, status=201)
 
 
-
 class AdminAppointmentSlotDetailView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
@@ -96,7 +95,6 @@ class AdminAppointmentSlotDetailView(APIView):
         slot = get_object_or_404(AppointmentSlot, id=pk)
         slot.delete()
         return Response(status=204)
-
 
 
 class AdminAppointmentBookingsView(APIView):
@@ -120,18 +118,11 @@ class AdminGenerateSlotsView(APIView):
         date_str = request.data.get("date")
         start_time = request.data.get("start_time")
         end_time = request.data.get("end_time")
-        shift = request.data.get("shift")
         duration = int(request.data.get("duration", 60))
 
-        if not date_str or not start_time or not end_time or not shift:
+        if not date_str or not start_time or not end_time:
             return Response(
                 {"detail": "date, start_time, end_time and shift are required"},
-                status=400
-            )
-
-        if shift not in ["morning", "evening"]:
-            return Response(
-                {"detail": "Invalid shift"},
                 status=400
             )
 
@@ -180,11 +171,17 @@ class AdminGenerateSlotsView(APIView):
                 start_time=current.time(),
             ).exists()
 
+            slot_shift = (
+                "morning"
+                if current.time().hour < 12
+                else "evening"
+            )
+
             if exists:
                 skipped.append({
                     "start_time": current.time(),
                     "end_time": slot_end.time(),
-                    "shift": shift,
+                    "shift": slot_shift,
                     "reason": "duplicate"
                 })
             else:
@@ -192,7 +189,7 @@ class AdminGenerateSlotsView(APIView):
                     date=slot_date,
                     start_time=current.time(),
                     end_time=slot_end.time(),
-                    shift=shift,
+                    shift=slot_shift,
                     is_available=True
                 )
                 created.append(slot.id)
@@ -203,6 +200,7 @@ class AdminGenerateSlotsView(APIView):
             "created_slots": created,
             "skipped_slots": skipped
         })
+
 
 class AdminCancelBookingView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
@@ -216,11 +214,14 @@ class AdminCancelBookingView(APIView):
         booking.status = "cancelled"
         booking.save(update_fields=["status"])
 
-        if booking.slot:
-            booking.slot.is_available = True
-            booking.slot.save(update_fields=["is_available"])
-
+        if booking.slot_id:
+            AppointmentSlot.objects.filter(
+                id=booking.slot_id
+            ).update(
+                is_available=True
+            )
         return Response({"status": "cancelled"})
+
 
 class AdminUpdateBookingStatusView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
@@ -235,12 +236,13 @@ class AdminUpdateBookingStatusView(APIView):
         booking.status = status_value
         booking.save(update_fields=["status"])
 
-        if booking.slot:
-            if status_value == "cancelled":
-                booking.slot.is_available = True
-            else:
-                booking.slot.is_available = False
-
-            booking.slot.save(update_fields=["is_available"])
+        if booking.slot_id:
+            AppointmentSlot.objects.filter(
+                id=booking.slot_id
+            ).update(
+                is_available=(
+                        status_value == "cancelled"
+                )
+            )
 
         return Response({"success": True})

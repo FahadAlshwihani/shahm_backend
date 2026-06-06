@@ -1,42 +1,24 @@
 from rest_framework import serializers
-from .models import BlogPost
-from .serializers import CategorySerializer, TagSerializer, PublicRelatedPersonSerializer
+from .serializers import CategorySerializer, TagSerializer
 from django.utils.html import strip_tags
-from .models import BlogClause
+from .models import BlogPost, BlogSection
 
 
-
-class PublicClauseSerializer(serializers.ModelSerializer):
+class PublicSectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BlogClause
-        fields = [
-            "id",
-            "title_ar",
-            "title_en",
-            "content_ar",
-            "content_en",
-            "order",
-        ]
+        model = BlogSection
+        fields = "__all__"
 
 
 class PublicBlogPostSerializer(serializers.ModelSerializer):
-
     category = CategorySerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
-
     cover_image_url = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
-
     excerpt_ar = serializers.SerializerMethodField()
     excerpt_en = serializers.SerializerMethodField()
-
-    clauses = PublicClauseSerializer(many=True, read_only=True)
+    sections = PublicSectionSerializer(many=True, read_only=True)
     read_time = serializers.IntegerField(read_only=True)
-
-    related_people = PublicRelatedPersonSerializer(
-        many=True,
-        read_only=True
-    )
 
     class Meta:
         model = BlogPost
@@ -45,8 +27,8 @@ class PublicBlogPostSerializer(serializers.ModelSerializer):
             "slug",
             "title_ar",
             "title_en",
-            "content_ar",
-            "content_en",
+            "intro_ar",  # ✅ FIX
+            "intro_en",  # ✅ FIX
             "excerpt_ar",
             "excerpt_en",
             "cover_image_url",
@@ -56,13 +38,9 @@ class PublicBlogPostSerializer(serializers.ModelSerializer):
             "category",
             "tags",
             "read_time",
-            "clauses",
-            "related_people",
+            "sections",
         ]
 
-    # -------------------------
-    # URL BUILDER
-    # -------------------------
     def _build_url(self, field):
         request = self.context.get("request")
         if not field:
@@ -75,17 +53,12 @@ class PublicBlogPostSerializer(serializers.ModelSerializer):
     def get_image_url(self, obj):
         return self._build_url(obj.image)
 
-    # -------------------------
-    # EXCERPT (AUTO)
-    # -------------------------
     def get_excerpt_ar(self, obj):
-        if obj.content_ar:
-            return strip_tags(obj.content_ar)[:160]
+        if obj.intro_ar:  # ✅ FIX
+            return strip_tags(obj.intro_ar)[:160]
         return ""
 
     def get_excerpt_en(self, obj):
-        if obj.content_en:
-            return strip_tags(obj.content_en)[:160]
+        if obj.intro_en:  # ✅ FIX
+            return strip_tags(obj.intro_en)[:160]
         return ""
-
-

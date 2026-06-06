@@ -1,7 +1,10 @@
 from django.contrib import admin
+
 from .models import (
-    PracticeArea,
+    MainService,
     Service,
+    ServiceSection,
+    ServicePageCMS,
     ServiceAdvisoryPage,
     ServiceAdvisoryRequest,
     ServiceAdvisoryRequestItem,
@@ -11,25 +14,71 @@ from .models import (
 )
 
 
-class ServiceInline(admin.TabularInline):
-    model = Service
+class ServiceSectionInline(admin.TabularInline):
+    model = ServiceSection
     extra = 1
 
 
-@admin.register(PracticeArea)
-class PracticeAreaAdmin(admin.ModelAdmin):
-    list_display = ("name_ar", "is_active", "show_on_home", "order")
-    list_editable = ("is_active", "show_on_home", "order")
-    search_fields = ("name_ar", "name_en")
-    inlines = [ServiceInline]
+@admin.register(MainService)
+class MainServiceAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "code",
+        "title_en",
+        "order",
+        "is_active",
+    )
+
+    list_editable = (
+        "order",
+        "is_active",
+    )
+
+    search_fields = (
+        "code",
+        "title_ar",
+        "title_en",
+    )
 
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ("title_ar", "practice_area", "order", "is_active")
-    list_editable = ("order", "is_active")
-    search_fields = ("title_ar", "title_en")
-    list_filter = ("practice_area",)
+
+    list_display = (
+        "serial_number",
+        "title_en",
+        "main_service",
+        "order",
+        "is_active",
+    )
+
+    list_editable = (
+        "order",
+        "is_active",
+    )
+
+    list_filter = (
+        "main_service",
+        "is_active",
+    )
+
+    search_fields = (
+        "serial_number",
+        "title_ar",
+        "title_en",
+    )
+
+    inlines = [ServiceSectionInline]
+
+
+@admin.register(ServicePageCMS)
+class ServicePageCMSAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title_en",
+        "primary_action_type",
+        "is_active",
+    )
 
 
 @admin.register(ServiceAdvisoryPage)
@@ -50,7 +99,6 @@ class ServiceAdvisoryRequestAdmin(admin.ModelAdmin):
         "first_name",
         "last_name",
         "email",
-        "get_services",
         "status",
         "created_at",
     )
@@ -65,24 +113,51 @@ class ServiceAdvisoryRequestAdmin(admin.ModelAdmin):
 
     inlines = [ServiceAdvisoryRequestItemInline]
 
-    def get_services(self, obj):
-        return ", ".join([item.service.title_en for item in obj.items.all()])
-
-    get_services.short_description = "Services"
-
 
 @admin.register(AppointmentSettings)
 class AppointmentSettingsAdmin(admin.ModelAdmin):
-    list_display = ["price_in_person", "price_online", "slot_duration", "is_active"]
-
+    list_display = (
+        "default_price",
+        "slot_duration",
+        "is_active",
+    )
 
 @admin.register(AppointmentSlot)
 class AppointmentSlotAdmin(admin.ModelAdmin):
-    list_display = ("date", "start_time", "end_time", "is_available")
-    list_filter = ("date", "is_available")
+
+    list_display = (
+        "date",
+        "start_time",
+        "end_time",
+        "is_available",
+    )
+
+    list_filter = (
+        "date",
+        "is_available",
+    )
 
 
 @admin.register(AppointmentBooking)
 class AppointmentBookingAdmin(admin.ModelAdmin):
-    list_display = ("first_name", "last_name", "slot", "status", "created_at")
-    list_filter = ("status",)
+    list_display = (
+        "id",
+        "reference",
+        "slot",
+        "status",
+        "created_at",
+    )
+
+    list_filter = (
+        "status",
+        "created_at",
+    )
+
+    search_fields = (
+        "reference",
+    )
+
+    readonly_fields = (
+        "reference",
+        "created_at",
+    )

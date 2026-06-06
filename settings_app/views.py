@@ -4,8 +4,8 @@ from django.core.mail import get_connection   # ✅ ADD
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from core.permissions import IsAdminOrSuper
-from .models import SiteSettings, EmailTemplate
-from .serializers import SiteSettingsSerializer, EmailTemplateSerializer
+from .models import SiteSettings
+from .serializers import SiteSettingsSerializer
 from messaging.utils import load_smtp_settings  # ✅ ADD
 
 
@@ -98,37 +98,3 @@ class EmailSMTPTestView(APIView):
                 status=400
             )
 
-
-# --------------------------------------------------
-# 4) Email HTML Templates
-# --------------------------------------------------
-class EmailTemplateView(APIView):
-    permission_classes = [IsAdminOrSuper]
-
-    def get(self, request):
-        templates = EmailTemplate.objects.all()
-        serializer = EmailTemplateSerializer(templates, many=True)
-        return Response(serializer.data)
-
-    def put(self, request):
-        template_type = request.data.get("template_type")
-
-        if not template_type:
-            return Response({"detail": "template_type is required"}, status=400)
-
-        try:
-            template = EmailTemplate.objects.get(template_type=template_type)
-        except EmailTemplate.DoesNotExist:
-            return Response({"detail": "Template not found"}, status=404)
-
-        serializer = EmailTemplateSerializer(
-            template,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(serializer.errors, status=400)

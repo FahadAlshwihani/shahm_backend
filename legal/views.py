@@ -15,7 +15,7 @@ class PublicLegalPageView(APIView):
     def get(self, request, slug):
 
         page = get_object_or_404(
-            LegalPage.objects.prefetch_related("sections"),
+            LegalPage.objects.prefetch_related("sections__subsections"),
             slug=slug,
             is_published=True
         )
@@ -31,7 +31,7 @@ class LegalPageListCreateView(APIView):
 
     def get(self, request):
 
-        pages = LegalPage.objects.prefetch_related("sections")
+        pages = LegalPage.objects.prefetch_related("sections__subsections")
 
         serializer = LegalPageSerializer(pages, many=True)
 
@@ -55,7 +55,7 @@ class LegalPageDetailView(APIView):
     def get_object(self, pk):
 
         return get_object_or_404(
-            LegalPage.objects.prefetch_related("sections"),
+            LegalPage.objects.prefetch_related("sections__subsections"),
             pk=pk
         )
 

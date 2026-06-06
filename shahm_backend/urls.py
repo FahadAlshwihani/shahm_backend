@@ -49,6 +49,7 @@ urlpatterns = [
     path("api/team/", include("team.urls")),
     path("api/services/", include("services.urls")),
     path("api/seo/", include("seo.urls")),
+    path("api/", include("form_builder.urls")),
 
     # ---------------------------
     # System files

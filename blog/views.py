@@ -1,11 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.db.models import Q, F
 
 from .models import Category, Tag, BlogPost, BlogPageSettings
 from .serializers import CategorySerializer, TagSerializer, BlogPostSerializer, BlogPageSettingsSerializer
 from accounts.permissions import IsEditorOrAbove
-
+from .serializers_public import PublicBlogPostSerializer
 
 
 # ================================
@@ -15,22 +16,56 @@ class PublicBlogListView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        post_type = request.GET.get("type")
+        search = (request.GET.get("search") or "")[:100]
+        tag = request.GET.get("tag")
 
-        posts = BlogPost.objects.filter(
-            status="published"
+        try:
+            category = int(request.GET.get("category_id")) if request.GET.get("category_id") else None
+        except ValueError:
+            return Response({"detail": "Invalid category"}, status=400)
+
+        posts = (
+            BlogPost.objects
+            .filter(status="published")
+            .select_related("category")
+            .prefetch_related("tags")
+            .only(
+                "id",
+                "slug",
+                "title_ar",
+                "title_en",
+                "intro_ar",
+                "intro_en",
+                "cover_image",
+                "created_at",
+                "views_count",
+                "category_id"
+            )
         )
 
-        if post_type:
-            posts = posts.filter(post_type=post_type)
+        if category:
+            posts = posts.filter(category_id=category)
 
-        posts = posts.order_by("-publish_date", "-created_at")
+        if tag:
+            posts = posts.filter(tags__id=tag)
 
-        serializer = BlogPostSerializer(
-            posts, many=True, context={"request": request}
+        if search:
+            posts = posts.filter(
+                Q(title_ar__icontains=search) |
+                Q(title_en__icontains=search) |
+                Q(intro_ar__icontains=search) |
+                Q(intro_en__icontains=search)
+            )
+
+        posts = posts.order_by("-publish_date", "-created_at").distinct()
+
+        serializer = PublicBlogPostSerializer(
+            posts,
+            many=True,
+            context={"request": request}
         )
+
         return Response(serializer.data)
-
 
 
 # ================================
@@ -41,16 +76,25 @@ class PublicBlogDetailView(APIView):
 
     def get(self, request, slug):
         try:
-            post = BlogPost.objects.get(slug=slug, status="published")
+            post = (
+                BlogPost.objects
+                .select_related("category")
+                .prefetch_related("tags", "sections")
+                .get(slug=slug, status="published")
+            )
         except BlogPost.DoesNotExist:
             return Response({"detail": "Post not found"}, status=404)
 
-        post.views_count += 1
-        post.save()
-
-        serializer = BlogPostSerializer(
-            post, context={"request": request}
+        BlogPost.objects.filter(id=post.id).update(
+            views_count=F("views_count") + 1
         )
+        post.refresh_from_db()
+
+        serializer = PublicBlogPostSerializer(
+            post,
+            context={"request": request}
+        )
+
         return Response(serializer.data)
 
 
@@ -63,7 +107,7 @@ class PublicCategoryListView(APIView):
     def get(self, request):
         categories = Category.objects.all()
         return Response(
-            CategorySerializer(categories, many=True).data
+            CategorySerializer(categories, many=True, context={"request": request}).data
         )
 
 
@@ -76,7 +120,7 @@ class PublicTagListView(APIView):
     def get(self, request):
         tags = Tag.objects.all()
         return Response(
-            TagSerializer(tags, many=True).data
+            TagSerializer(tags, many=True, context={"request": request}).data
         )
 
 
@@ -89,11 +133,14 @@ class CategoryListCreateView(APIView):
     def get(self, request):
         categories = Category.objects.all()
         return Response(
-            CategorySerializer(categories, many=True).data
+            CategorySerializer(categories, many=True, context={"request": request}).data
         )
 
     def post(self, request):
-        serializer = CategorySerializer(data=request.data)
+        serializer = CategorySerializer(
+            data=request.data,
+            context={"request": request}  # ✅ FIX
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -110,7 +157,10 @@ class CategoryDetailView(APIView):
             return Response({"detail": "Not found"}, status=404)
 
         serializer = CategorySerializer(
-            category, data=request.data, partial=True
+            category,
+            data=request.data,
+            partial=True,
+            context={"request": request}  # ✅ FIX
         )
 
         if serializer.is_valid():
@@ -138,7 +188,7 @@ class TagListCreateView(APIView):
     def get(self, request):
         tags = Tag.objects.all()
         return Response(
-            TagSerializer(tags, many=True).data
+            TagSerializer(tags, many=True, context={"request": request}).data
         )
 
     def post(self, request):
@@ -185,14 +235,12 @@ class BlogListCreateView(APIView):
     permission_classes = [IsAuthenticated, IsEditorOrAbove]
 
     def get(self, request):
-        post_type = request.GET.get("type")
-
-        posts = BlogPost.objects.all()
-
-        if post_type:
-            posts = posts.filter(post_type=post_type)
-
-        posts = posts.order_by("-created_at")
+        posts = (
+            BlogPost.objects
+            .select_related("category")
+            .prefetch_related("tags", "sections")
+            .order_by("-created_at")
+        )
 
         serializer = BlogPostSerializer(
             posts, many=True, context={"request": request}

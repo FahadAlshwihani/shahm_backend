@@ -26,9 +26,8 @@ urlpatterns = [
     path("categories/", PublicCategoryListView.as_view()),
     path("tags/", PublicTagListView.as_view()),
 
-    path("", PublicBlogListView.as_view()),
-    path("<slug:slug>/", PublicBlogDetailView.as_view()),
-
+    path("posts/", PublicBlogListView.as_view()),
+    path("posts/<slug:slug>/", PublicBlogDetailView.as_view()),
 
     # ==========================
     # ADMIN ROUTES
@@ -42,5 +41,6 @@ urlpatterns = [
 
     path("admin/posts/", BlogListCreateView.as_view()),
     path("admin/posts/<int:pk>/", BlogDetailView.as_view()),
-]
 
+    path("admin/settings/", BlogSettingsUpdateView.as_view()),
+]

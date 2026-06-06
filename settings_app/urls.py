@@ -3,7 +3,6 @@ from django.urls import path
 from .views import (
     SiteSettingsView,
     EmailSettingsView,
-    EmailTemplateView,
     EmailSMTPTestView,
 )
 
@@ -16,6 +15,4 @@ urlpatterns = [
     # Test SMTP
     path("email/test/", EmailSMTPTestView.as_view(), name="email-test"),
 
-    # HTML templates
-    path("email-templates/", EmailTemplateView.as_view(), name="email-template"),
 ]

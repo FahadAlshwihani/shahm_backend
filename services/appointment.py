@@ -6,6 +6,15 @@ from services.models import AppointmentSlot, AppointmentBooking
 
 
 class AppointmentSlotSerializer(serializers.ModelSerializer):
+    start_time = serializers.TimeField(
+        format="%H:%M"
+    )
+
+    end_time = serializers.TimeField(
+        format="%H:%M"
+    )
+
+    slot_label = serializers.SerializerMethodField()
     class Meta:
         model = AppointmentSlot
         fields = [
@@ -15,21 +24,17 @@ class AppointmentSlotSerializer(serializers.ModelSerializer):
             "end_time",
             "shift",
             "is_available",
+            "slot_label",
         ]
 
     def validate(self, data):
         date = data.get("date", getattr(self.instance, "date", None))
         start = data.get("start_time", getattr(self.instance, "start_time", None))
         end = data.get("end_time", getattr(self.instance, "end_time", None))
-        shift = data.get("shift", getattr(self.instance, "shift", None))
-
-        if not date or not start or not end or not shift:
+        if not date or not start or not end:
             raise serializers.ValidationError(
                 "Date, start time, end time, and shift are required"
             )
-
-        if shift not in ["morning", "evening"]:
-            raise serializers.ValidationError("Invalid shift")
 
         if date < timezone.localdate():
             raise serializers.ValidationError("Cannot create slot in the past")
@@ -52,34 +57,49 @@ class AppointmentSlotSerializer(serializers.ModelSerializer):
         if qs.exists():
             raise serializers.ValidationError("Slot already exists")
 
+        data["shift"] = (
+            "morning"
+            if start.hour < 12
+            else "evening"
+        )
+
         return data
+
+    def get_slot_label(self, obj):
+        return (
+            f"{obj.date} | "
+            f"{obj.start_time.strftime('%H:%M')} - "
+            f"{obj.end_time.strftime('%H:%M')}"
+        )
 
 
 class AppointmentBookingSerializer(serializers.ModelSerializer):
+    slot_date = serializers.DateField(
+        source="slot_date_snapshot",
+        read_only=True,
+    )
 
-    slot_date = serializers.DateField(source="slot.date", read_only=True)
-    slot_start = serializers.TimeField(source="slot.start_time", read_only=True)
-    slot_end = serializers.TimeField(source="slot.end_time", read_only=True)
-    slot_shift = serializers.CharField(source="slot.shift", read_only=True)
+    slot_start = serializers.TimeField(
+        source="slot_start_snapshot",
+        read_only=True,
+    )
 
-    attachment = serializers.SerializerMethodField()
-    voice_note = serializers.SerializerMethodField()
+    slot_end = serializers.TimeField(
+        source="slot_end_snapshot",
+        read_only=True,
+    )
 
-    def get_attachment(self, obj):
-        request = self.context.get("request")
-        if obj.attachment:
-            if request:
-                return request.build_absolute_uri(obj.attachment.url)
-            return obj.attachment.url
-        return None
+    slot_shift = serializers.CharField(
+        source="slot_shift_snapshot",
+        read_only=True,
+    )
 
-    def get_voice_note(self, obj):
-        request = self.context.get("request")
-        if obj.voice_note:
-            if request:
-                return request.build_absolute_uri(obj.voice_note.url)
-            return obj.voice_note.url
-        return None
+    slot_label = serializers.CharField(
+        source="slot_label_snapshot",
+        read_only=True,
+    )
+
+    dynamic_fields = serializers.SerializerMethodField()
 
 
     class Meta:
@@ -91,21 +111,57 @@ class AppointmentBookingSerializer(serializers.ModelSerializer):
             "slot_start",
             "slot_end",
             "slot_shift",
-            "appointment_type",
-            "title",
-            "first_name",
-            "last_name",
-            "email",
-            "phone",
-            "visitors",
-            "message",
-            "attachment",
-            "voice_note",
+            "slot_label",
             "status",
             "reference",
             "created_at",
+            "dynamic_fields",
         ]
         read_only_fields = [
             "reference",
             "created_at",
         ]
+
+    def get_dynamic_fields(self, obj):
+        if not obj.form_submission:
+            return []
+
+        values = (
+            obj.form_submission.values
+            .select_related("field")
+            .all()
+        )
+
+        result = []
+
+        for value in values:
+            field = value.field
+
+            request = self.context.get("request")
+
+            if value.value_json is not None:
+                field_value = value.value_json
+
+            elif value.value_file:
+                if request:
+                    field_value = request.build_absolute_uri(
+                        value.value_file.url
+                    )
+                else:
+                    field_value = value.value_file.url
+
+            else:
+                field_value = value.value_text
+
+            result.append({
+                "field_id": field.id,
+                "key": field.key,
+                "system_key": field.system_key,
+                "label_ar": field.label_ar,
+                "label_en": field.label_en,
+                "field_type": field.field_type,
+                "value": field_value,
+                "required": field.required,
+            })
+
+        return result

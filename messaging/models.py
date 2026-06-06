@@ -58,21 +58,23 @@ class BroadcastLog(models.Model):
         ordering = ["-created_at"]
 
 class EmailTemplate(models.Model):
-    TEMPLATE_CHOICES = [
-        ("admin_alert", "Admin Alert"),
-        ("auto_reply", "Auto Reply"),
-        ("subscription_welcome", "Subscription Welcome"),
-    ]
 
     template_type = models.CharField(
-        max_length=50,
-        choices=TEMPLATE_CHOICES,
-        unique=True
+        max_length=100,
+        unique=True,
+        db_index=True,
     )
-    subject = models.CharField(max_length=255, blank=True)
+
+    subject = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
     html_content = models.TextField()
 
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
 
     def __str__(self):
         return self.template_type

@@ -10,9 +10,6 @@ from .views_public import (
     PublicPageView,
     PublicLegalPageView,
 
-    PublicPracticeAreasView,
-    PublicPracticeAreaDetailView,
-
     PublicBlogListView,
     PublicBlogDetailView,
 
@@ -45,9 +42,7 @@ urlpatterns = [
     # Legal Pages
     path("legal/<slug:slug>/", PublicLegalPageView.as_view()),
 
-    # Services
-    path("services/", PublicPracticeAreasView.as_view()),
-    path("services/<slug:slug>/", PublicPracticeAreaDetailView.as_view()),
+
 
     # Blog (Public)
     path("blog/", PublicBlogListView.as_view()),

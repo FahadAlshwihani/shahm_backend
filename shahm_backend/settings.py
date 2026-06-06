@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from datetime import timedelta
+from corsheaders.defaults import default_headers
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,7 +11,6 @@ SECRET_KEY = "django-insecure-tx+!c&8)8t+)*m8mu*)%mi%e&8%t36kn&9!&_vfkhph*r@bot2
 DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-
 
 # ===========================
 # INSTALLED APPS
@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     "messaging",
     "settings_app.apps.SettingsAppConfig",
     "seo",
+    "form_builder",
+    'django_filters',
 ]
-
 
 # ===========================
 # MIDDLEWARE
@@ -65,10 +66,7 @@ MIDDLEWARE = [
     "core.middleware.VisitorTrackingMiddleware",
 ]
 
-
-
 ROOT_URLCONF = "shahm_backend.urls"
-
 
 # ===========================
 # TEMPLATES
@@ -89,9 +87,7 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = "shahm_backend.wsgi.application"
-
 
 # ===========================
 # AUTH
@@ -99,9 +95,7 @@ WSGI_APPLICATION = "shahm_backend.wsgi.application"
 
 AUTH_USER_MODEL = "accounts.User"
 
-
 REST_FRAMEWORK = {
-
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
@@ -110,12 +104,18 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ),
 
+    "DEFAULT_THROTTLE_CLASSES": [],
+
+    "DEFAULT_THROTTLE_RATES": {
+        "otp": "5/min",
+        "login": "10/min",
+        "search": "30/min",
+    },
+
     "EXCEPTION_HANDLER": "core.exceptions.custom_exception_handler",
 
     "DEFAULT_PAGINATION_CLASS": "core.pagination.DefaultPagination",
-
 }
-
 
 SIMPLE_JWT = {
 
@@ -133,7 +133,6 @@ SIMPLE_JWT = {
 
 }
 
-
 # ===========================
 # DATABASE
 # ===========================
@@ -144,7 +143,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # ===========================
 # AUTH PASSWORD
@@ -157,7 +155,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-
 # ===========================
 # I18N
 # ===========================
@@ -168,7 +165,6 @@ TIME_ZONE = "Asia/Riyadh"
 USE_I18N = True
 USE_TZ = True
 
-
 # ===========================
 # STATIC & MEDIA
 # ===========================
@@ -176,7 +172,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = BASE_DIR / "media"     # <<<<< مهم جداً
+MEDIA_ROOT = BASE_DIR / "media"  # <<<<< مهم جداً
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -186,20 +182,40 @@ STATICFILES_DIRS = [
 # FILE UPLOAD SETTINGS (IMPORTANT FOR VIDEO)
 # ===========================
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024   # 50MB
-FILE_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024   # 50MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024  # 50MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024  # 50MB
 
 FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 ]
 
-
 # ===========================
 # CORS
 # ===========================
-
 CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_HEADERS = list(
+    default_headers
+) + [
+                         "x-access-token",
+                     ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+FRONTEND_URL = "http://localhost:3000"
+BACKEND_URL = "http://127.0.0.1:8000"
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#     }
+# }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}

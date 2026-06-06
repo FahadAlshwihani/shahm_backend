@@ -44,6 +44,7 @@ class SiteSettings(models.Model):
     linkedin_url = models.URLField(blank=True)
     x_url = models.URLField(blank=True)
     instagram_url = models.URLField(blank=True)
+    tiktok_url = models.URLField(blank=True)
 
     # -----------------------
     # الشعار
@@ -66,19 +67,3 @@ class SiteSettings(models.Model):
         verbose_name = "Site Settings"
         verbose_name_plural = "Site Settings"
 
-
-class EmailTemplate(models.Model):
-    TEMPLATE_TYPES = [
-        ("auto_reply", "Auto Reply to Client"),
-        ("subscription_welcome", "Subscription Welcome Email"),
-        ("admin_alert", "Admin New Message Alert"),
-    ]
-
-    template_type = models.CharField(max_length=50, choices=TEMPLATE_TYPES, unique=True)
-    subject = models.CharField(max_length=200, blank=True)
-    html_content = models.TextField(blank=True)
-
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.template_type

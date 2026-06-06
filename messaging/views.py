@@ -1,6 +1,5 @@
 import csv
 
-from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -15,8 +14,11 @@ from .serializers import (
     SubscriberSerializer,
     BroadcastLogSerializer,
 )
-from .utils import load_smtp_settings, render_email_template
+from .utils import render_email_template
 
+from email_settings.services import (
+    DynamicEmailService,
+)
 
 # =========================
 # Public Contact Form
@@ -29,7 +31,6 @@ class ContactMessageView(APIView):
         serializer.is_valid(raise_exception=True)
 
         message = serializer.save()
-        load_smtp_settings()
 
         settings = SiteSettings.objects.first()
         if not settings:
@@ -52,14 +53,12 @@ class ContactMessageView(APIView):
         )
 
         if subject and html and admin_email and sender_email:
-            mail = EmailMultiAlternatives(
+            DynamicEmailService.send_email(
                 subject=subject,
                 body="",
-                from_email=sender_email,
-                to=[admin_email],
+                recipient_list=[admin_email],
+                html_body=html,
             )
-            mail.attach_alternative(html, "text/html")
-            mail.send()
 
         # Auto reply only if email exists
         if message.email:
@@ -73,14 +72,12 @@ class ContactMessageView(APIView):
             )
 
             if subject and html and sender_email:
-                mail = EmailMultiAlternatives(
+                DynamicEmailService.send_email(
                     subject=subject,
                     body="",
-                    from_email=sender_email,
-                    to=[message.email],
+                    recipient_list=[message.email],
+                    html_body=html,
                 )
-                mail.attach_alternative(html, "text/html")
-                mail.send()
 
         return Response({"success": True})
 
@@ -100,7 +97,6 @@ class SubscriberView(APIView):
             return Response({"success": True})
 
         Subscriber.objects.create(email=email)
-        load_smtp_settings()
 
         settings = SiteSettings.objects.first()
         subject, html = render_email_template(
@@ -112,14 +108,12 @@ class SubscriberView(APIView):
         )
 
         if subject and html and settings and settings.auto_reply_email:
-            mail = EmailMultiAlternatives(
+            DynamicEmailService.send_email(
                 subject=subject,
                 body="",
-                from_email=settings.auto_reply_email,
-                to=[email],
+                recipient_list=[email],
+                html_body=html,
             )
-            mail.attach_alternative(html, "text/html")
-            mail.send()
 
         return Response({"success": True})
 
@@ -224,7 +218,6 @@ class BroadcastEmailView(APIView):
         if not subject or not html_content:
             return Response({"error": "Missing fields"}, status=400)
 
-        load_smtp_settings()
 
         settings = SiteSettings.objects.first()
         sender = settings.auto_reply_email if settings else None
@@ -245,14 +238,12 @@ class BroadcastEmailView(APIView):
         sent = 0
         for email in emails:
             try:
-                mail = EmailMultiAlternatives(
+                DynamicEmailService.send_email(
                     subject=subject,
                     body="",
-                    from_email=sender,
-                    to=[email],
+                    recipient_list=[email],
+                    html_body=html_content,
                 )
-                mail.attach_alternative(html_content, "text/html")
-                mail.send()
                 sent += 1
             except Exception as e:
                 print(f"Email error for {email}: {e}")
