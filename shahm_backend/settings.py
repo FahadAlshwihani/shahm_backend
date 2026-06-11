@@ -3,14 +3,18 @@
 from pathlib import Path
 from datetime import timedelta
 from corsheaders.defaults import default_headers
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-tx+!c&8)8t+)*m8mu*)%mi%e&8%t36kn&9!&_vfkhph*r@bot2"
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")
 
-DEBUG = True
+SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+DEBUG = env.bool("DEBUG", default=False)
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # ===========================
 # INSTALLED APPS
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
 
@@ -65,6 +70,15 @@ MIDDLEWARE = [
     # Visitor Tracking (بعد Authentication)
     "core.middleware.VisitorTrackingMiddleware",
 ]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 ROOT_URLCONF = "shahm_backend.urls"
 
@@ -137,10 +151,24 @@ SIMPLE_JWT = {
 # DATABASE
 # ===========================
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
 }
 
@@ -174,9 +202,6 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"  # <<<<< مهم جداً
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 # ===========================
 # FILE UPLOAD SETTINGS (IMPORTANT FOR VIDEO)
@@ -192,9 +217,10 @@ FILE_UPLOAD_HANDLERS = [
 # ===========================
 # CORS
 # ===========================
-CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[env("FRONTEND_URL")])
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS")
 
 CORS_ALLOW_HEADERS = list(
     default_headers
@@ -204,8 +230,8 @@ CORS_ALLOW_HEADERS = list(
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-FRONTEND_URL = "http://localhost:3000"
-BACKEND_URL = "http://127.0.0.1:8000"
+FRONTEND_URL = env("FRONTEND_URL")
+BACKEND_URL = env("BACKEND_URL")
 
 # CACHES = {
 #     "default": {
@@ -219,3 +245,22 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     }
 }
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+
+    X_FRAME_OPTIONS = "DENY"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+] if (BASE_DIR / "static").exists() else []
