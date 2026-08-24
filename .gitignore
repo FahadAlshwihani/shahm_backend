@@ -5,29 +5,43 @@ __pycache__/
 
 # Virtual Environment
 venv/
+.venv/
+env/
 .env
 .env.*
+!.env.example
 
 # Django
+*.sqlite3
 db.sqlite3
-media/
+media/*
+!media/.gitkeep
+hero/media/
 staticfiles/
 
 # Logs
 *.log
+logs/
 
 # IDE
 .idea/
 .vscode/
+*.iml
 
 # OS
 .DS_Store
 Thumbs.db
+*.tmp
+*.temp
+*.swp
+*.swo
 
 # Testing
 .coverage
 htmlcov/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Migrations cache
 **/__pycache__/

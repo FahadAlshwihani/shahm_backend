@@ -1,0 +1,1 @@
+"""Shahm Django domain applications."""

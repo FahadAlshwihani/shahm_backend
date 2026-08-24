@@ -1,0 +1,7258 @@
+{
+  "generated_from": {
+    "frontend": "all active src request call sites and src/api/routes.js",
+    "backend": "Django live URL resolver"
+  },
+  "frontend_request_count": 219,
+  "unique_frontend_contract_count": 168,
+  "domain_api_function_count": 171,
+  "centralized_component_callsite_count": 48,
+  "backend_pattern_count": 179,
+  "summary": {
+    "MATCH": 219,
+    "MISMATCH": 0,
+    "UNCERTAIN": 0
+  },
+  "frontend_requests": [
+    {
+      "module": "aboutApi.js",
+      "function": "createIcon",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/about/icons/",
+      "backend_path": "/api/cms/admin/about/icons/",
+      "view": "apps.cms.views.AdminAboutIconListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "createPartner",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/about/partners/",
+      "backend_path": "/api/cms/admin/about/partners/",
+      "view": "apps.cms.views.AdminAboutPartnerListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "createPost",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/about/posts/",
+      "backend_path": "/api/cms/admin/about/posts/",
+      "view": "apps.cms.views.AdminAboutPostListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "createSection",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/about/sections/",
+      "backend_path": "/api/cms/admin/about/sections/",
+      "view": "apps.cms.views.AdminAboutSectionListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "createStat",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/about/stats/",
+      "backend_path": "/api/cms/admin/about/stats/",
+      "view": "apps.cms.views.AdminAboutStatListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "deleteIcon",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/about/icons/{id}/",
+      "backend_path": "/api/cms/admin/about/icons/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutIconDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "deletePartner",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/about/partners/{id}/",
+      "backend_path": "/api/cms/admin/about/partners/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutPartnerDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "deletePost",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/about/posts/{id}/",
+      "backend_path": "/api/cms/admin/about/posts/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutPostDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "deleteSection",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/about/sections/{id}/",
+      "backend_path": "/api/cms/admin/about/sections/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutSectionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "deleteStat",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/about/stats/{id}/",
+      "backend_path": "/api/cms/admin/about/stats/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutStatDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "getAdminAbout",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/about/",
+      "backend_path": "/api/cms/admin/about/",
+      "view": "apps.cms.views.AdminAboutView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "getPublicAbout",
+      "callers": [
+        "src/store/useAboutStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/public/about/",
+      "backend_path": "/api/cms/public/about/",
+      "view": "apps.cms.views.PublicAboutView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updateAdminAbout",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/",
+      "backend_path": "/api/cms/admin/about/",
+      "view": "apps.cms.views.AdminAboutView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updateIcon",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/icons/{id}/",
+      "backend_path": "/api/cms/admin/about/icons/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutIconDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updatePartner",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/partners/{id}/",
+      "backend_path": "/api/cms/admin/about/partners/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutPartnerDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updatePost",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/posts/{id}/",
+      "backend_path": "/api/cms/admin/about/posts/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutPostDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updateSection",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/sections/{id}/",
+      "backend_path": "/api/cms/admin/about/sections/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutSectionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "aboutApi.js",
+      "function": "updateStat",
+      "callers": [
+        "src/pages/dashboard/cms/About.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/about/stats/{id}/",
+      "backend_path": "/api/cms/admin/about/stats/<int:pk>/",
+      "view": "apps.cms.views.AdminAboutStatDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "deleteSlot",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentSlots.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/appointments/slots/{id}/",
+      "backend_path": "/api/services/admin/appointments/slots/<int:pk>/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSlotDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "generateSlots",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentSlots.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/appointments/slots/generate/",
+      "backend_path": "/api/services/admin/appointments/slots/generate/",
+      "view": "apps.services.appointments.admin_views.AdminGenerateSlotsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "getAdminAppointmentPage",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentContent.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/appointments/page/",
+      "backend_path": "/api/services/admin/appointments/page/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentPageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "getAdminAppointmentSettings",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentContent.jsx",
+        "src/pages/dashboard/appointments/AppointmentSlots.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/appointments/settings/",
+      "backend_path": "/api/services/admin/appointments/settings/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "getAdminBookings",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentBookings.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/appointments/bookings/",
+      "backend_path": "/api/services/admin/appointments/bookings/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentBookingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "getAdminSlots",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentSlots.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/appointments/slots/",
+      "backend_path": "/api/services/admin/appointments/slots/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSlotsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "getAvailableSlots",
+      "callers": [
+        "src/components/forms/DynamicFieldRenderer.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/appointments/slots/",
+      "backend_path": "/api/services/public/appointments/slots/",
+      "view": "apps.services.appointments.public_views.PublicAvailableSlotsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "updateAdminAppointmentPage",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentContent.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/appointments/page/",
+      "backend_path": "/api/services/admin/appointments/page/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentPageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "updateAdminAppointmentSettings",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentContent.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/appointments/settings/",
+      "backend_path": "/api/services/admin/appointments/settings/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "updateBookingStatus",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentBookings.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/appointments/bookings/{id}/status/",
+      "backend_path": "/api/services/admin/appointments/bookings/<int:pk>/status/",
+      "view": "apps.services.appointments.admin_views.AdminUpdateBookingStatusView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "appointmentsApi.js",
+      "function": "updateSlot",
+      "callers": [
+        "src/pages/dashboard/appointments/AppointmentSlots.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/appointments/slots/{id}/",
+      "backend_path": "/api/services/admin/appointments/slots/<int:pk>/",
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSlotDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "authApi.js",
+      "function": "createUser",
+      "callers": [
+        "src/store/useUsersStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/accounts/users/create/",
+      "backend_path": "/api/accounts/users/create/",
+      "view": "apps.accounts.views.CreateUserView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "authApi.js",
+      "function": "deleteUser",
+      "callers": [
+        "src/store/useUsersStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/accounts/users/{id}/",
+      "backend_path": "/api/accounts/users/<int:pk>/",
+      "view": "apps.accounts.views.UserDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "authApi.js",
+      "function": "getUsers",
+      "callers": [
+        "src/store/useUsersStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/accounts/users/",
+      "backend_path": "/api/accounts/users/",
+      "view": "apps.accounts.views.UsersListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "authApi.js",
+      "function": "login",
+      "callers": [
+        "src/store/useAuthStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/accounts/login/",
+      "backend_path": "/api/accounts/login/",
+      "view": "apps.accounts.views.LoginView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "authApi.js",
+      "function": "updateUser",
+      "callers": [
+        "src/store/useUsersStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/accounts/users/{id}/",
+      "backend_path": "/api/accounts/users/<int:pk>/",
+      "view": "apps.accounts.views.UserDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "createCategory",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/blog/admin/categories/",
+      "backend_path": "/api/blog/admin/categories/",
+      "view": "apps.blog.views.CategoryListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "createPost",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/blog/admin/posts/",
+      "backend_path": "/api/blog/admin/posts/",
+      "view": "apps.blog.views.BlogListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "createTag",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/blog/admin/tags/",
+      "backend_path": "/api/blog/admin/tags/",
+      "view": "apps.blog.views.TagListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "deleteCategory",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/blog/admin/categories/{id}/",
+      "backend_path": "/api/blog/admin/categories/<int:pk>/",
+      "view": "apps.blog.views.CategoryDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "deletePost",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/blog/admin/posts/{id}/",
+      "backend_path": "/api/blog/admin/posts/<int:pk>/",
+      "view": "apps.blog.views.BlogDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "deleteTag",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/blog/admin/tags/{id}/",
+      "backend_path": "/api/blog/admin/tags/<int:pk>/",
+      "view": "apps.blog.views.TagDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "getCategories",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/admin/categories/",
+      "backend_path": "/api/blog/admin/categories/",
+      "view": "apps.blog.views.CategoryListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "getPosts",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/admin/posts/",
+      "backend_path": "/api/blog/admin/posts/",
+      "view": "apps.blog.views.BlogListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "getTags",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/admin/tags/",
+      "backend_path": "/api/blog/admin/tags/",
+      "view": "apps.blog.views.TagListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "updateCategory",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/blog/admin/categories/{id}/",
+      "backend_path": "/api/blog/admin/categories/<int:pk>/",
+      "view": "apps.blog.views.CategoryDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "updatePost",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/blog/admin/posts/{id}/",
+      "backend_path": "/api/blog/admin/posts/<int:pk>/",
+      "view": "apps.blog.views.BlogDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "blogApi.js",
+      "function": "updateTag",
+      "callers": [
+        "src/store/useBlogStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/blog/admin/tags/{id}/",
+      "backend_path": "/api/blog/admin/tags/<int:pk>/",
+      "view": "apps.blog.views.TagDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "careersApi.js",
+      "function": "createJob",
+      "callers": [
+        "src/pages/dashboard/jobs/CareersCMS.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/careers/jobs/",
+      "backend_path": "/api/services/admin/careers/jobs/",
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "serializer": "apps.services.serializers.CareerJobSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "careersApi.js",
+      "function": "deleteJob",
+      "callers": [
+        "src/pages/dashboard/jobs/CareersCMS.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/careers/jobs/{id}/",
+      "backend_path": "/api/services/admin/careers/jobs/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "serializer": "apps.services.serializers.CareerJobSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "careersApi.js",
+      "function": "getAdminJobs",
+      "callers": [
+        "src/pages/dashboard/jobs/CareersCMS.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/careers/jobs/",
+      "backend_path": "/api/services/admin/careers/jobs/",
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "serializer": "apps.services.serializers.CareerJobSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "careersApi.js",
+      "function": "getApplications",
+      "callers": [
+        "src/pages/dashboard/jobs/CareerApplicationsCMS.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/careers/applications/",
+      "backend_path": "/api/services/admin/careers/applications/",
+      "view": "apps.services.views.AdminCareerApplicationsViewSet",
+      "serializer": "apps.services.serializers.CareerApplicationSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "careersApi.js",
+      "function": "updateJob",
+      "callers": [
+        "src/pages/dashboard/jobs/CareersCMS.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/careers/jobs/{id}/",
+      "backend_path": "/api/services/admin/careers/jobs/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "serializer": "apps.services.serializers.CareerJobSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminCreateFaq",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/faq/",
+      "backend_path": "/api/cms/admin/faq/",
+      "view": "apps.cms.views.FAQListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminCreateFaqCategory",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/faq-categories/",
+      "backend_path": "/api/cms/admin/faq-categories/",
+      "view": "apps.cms.views.FAQCategoryListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminCreateHero",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/heroes/",
+      "backend_path": "/api/cms/admin/heroes/",
+      "view": "apps.cms.views.HeroListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminCreateHeroMedia",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/hero-media/{heroId}/",
+      "backend_path": "/api/cms/admin/hero-media/<int:hero_id>/",
+      "view": "apps.cms.views.HeroMediaListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminCreatePage",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/cms/admin/pages/",
+      "backend_path": "/api/cms/admin/pages/",
+      "view": "apps.cms.views.PageListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminDeleteFaq",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/faq/{id}/",
+      "backend_path": "/api/cms/admin/faq/<int:pk>/",
+      "view": "apps.cms.views.FAQDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminDeleteFaqCategory",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/faq-categories/{id}/",
+      "backend_path": "/api/cms/admin/faq-categories/<int:pk>/",
+      "view": "apps.cms.views.FAQCategoryDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminDeleteHero",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/heroes/{id}/",
+      "backend_path": "/api/cms/admin/heroes/<int:pk>/",
+      "view": "apps.cms.views.HeroDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminDeleteHeroMedia",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/hero-media/item/{id}/",
+      "backend_path": "/api/cms/admin/hero-media/item/<int:pk>/",
+      "view": "apps.cms.views.HeroMediaDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminDeletePage",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/cms/admin/pages/{id}/",
+      "backend_path": "/api/cms/admin/pages/<int:pk>/",
+      "view": "apps.cms.views.PageDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminEditFaq",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/faq/{id}/",
+      "backend_path": "/api/cms/admin/faq/<int:pk>/",
+      "view": "apps.cms.views.FAQDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminEditFaqCategory",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/faq-categories/{id}/",
+      "backend_path": "/api/cms/admin/faq-categories/<int:pk>/",
+      "view": "apps.cms.views.FAQCategoryDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminEditHero",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/heroes/{id}/",
+      "backend_path": "/api/cms/admin/heroes/<int:pk>/",
+      "view": "apps.cms.views.HeroDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminEditHeroMedia",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/hero-media/item/{id}/",
+      "backend_path": "/api/cms/admin/hero-media/item/<int:pk>/",
+      "view": "apps.cms.views.HeroMediaDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminEditPage",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/cms/admin/pages/{id}/",
+      "backend_path": "/api/cms/admin/pages/<int:pk>/",
+      "view": "apps.cms.views.PageDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminFaq",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/faq/",
+      "backend_path": "/api/cms/admin/faq/",
+      "view": "apps.cms.views.FAQListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminFaqCategories",
+      "callers": [
+        "src/store/useFaqCmsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/faq-categories/",
+      "backend_path": "/api/cms/admin/faq-categories/",
+      "view": "apps.cms.views.FAQCategoryListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "map"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminGetHeroMedia",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/hero-media/{heroId}/",
+      "backend_path": "/api/cms/admin/hero-media/<int:hero_id>/",
+      "view": "apps.cms.views.HeroMediaListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminHeroes",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/heroes/",
+      "backend_path": "/api/cms/admin/heroes/",
+      "view": "apps.cms.views.HeroListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "cmsApi.js",
+      "function": "adminPages",
+      "callers": [
+        "src/store/useCmsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/admin/pages/",
+      "backend_path": "/api/cms/admin/pages/",
+      "view": "apps.cms.views.PageListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "contactApi.js",
+      "function": "getPublicContactPage",
+      "callers": [
+        "src/store/useContactStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/public/contact-page/",
+      "backend_path": "/api/cms/public/contact-page/",
+      "view": "apps.cms.views.PublicContactPageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "cards",
+        "description_ar",
+        "description_en",
+        "faq_preview",
+        "title_ar",
+        "title_en"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "dashboardApi.js",
+      "function": "getDashboardStats",
+      "callers": [
+        "src/store/useDashboardStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/admin/dashboard-stats/",
+      "backend_path": "/api/public/admin/dashboard-stats/",
+      "view": "apps.core.views_public.DashboardStatsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "emailApi.js",
+      "function": "getEmailSettings",
+      "callers": [
+        "src/store/useEmailSettingsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/settings/email/",
+      "backend_path": "/api/settings/email/",
+      "view": "apps.settings_app.views.EmailSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "error"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "emailApi.js",
+      "function": "getEmailTemplates",
+      "callers": [
+        "src/pages/dashboard/email/EmailTemplates.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/email-templates/",
+      "backend_path": "/api/messaging/admin/email-templates/",
+      "view": "apps.messaging.views.EmailTemplateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "forEach"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "emailApi.js",
+      "function": "updateEmailSettings",
+      "callers": [
+        "src/store/useEmailSettingsStore.js"
+      ],
+      "method": "PUT",
+      "frontend_path": "/settings/email/",
+      "backend_path": "/api/settings/email/",
+      "view": "apps.settings_app.views.EmailSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "error"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "emailApi.js",
+      "function": "updateEmailTemplate",
+      "callers": [
+        "src/pages/dashboard/email/EmailTemplates.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/messaging/admin/email-templates/",
+      "backend_path": "/api/messaging/admin/email-templates/",
+      "view": "apps.messaging.views.EmailTemplateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "forEach"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "createAdminForm",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/admin/forms/",
+      "backend_path": "/api/admin/forms/",
+      "view": "apps.form_builder.views.AdminFormTemplateListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "createSuccessResponse",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/admin/success-responses/",
+      "backend_path": "/api/admin/success-responses/",
+      "view": "apps.form_builder.views.AdminSuccessResponseListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "deleteAdminForm",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/admin/forms/{id}/",
+      "backend_path": "/api/admin/forms/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormTemplateDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "deleteSuccessResponse",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/admin/success-responses/{id}/",
+      "backend_path": "/api/admin/success-responses/<int:pk>/",
+      "view": "apps.form_builder.views.AdminSuccessResponseDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getAdminForm",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/admin/forms/{id}/",
+      "backend_path": "/api/admin/forms/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormTemplateDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getAdminForms",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/admin/forms/",
+      "backend_path": "/api/admin/forms/",
+      "view": "apps.form_builder.views.AdminFormTemplateListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getFormSubmissions",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/admin/form-submissions/",
+      "backend_path": "/api/admin/form-submissions/",
+      "view": "apps.form_builder.views.AdminFormSubmissionListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getPublicForm",
+      "callers": [
+        "src/components/forms/DynamicPublicForm.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/forms/{slug}/",
+      "backend_path": "/api/public/forms/<slug:slug>/",
+      "view": "apps.form_builder.views.PublicFormDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "initial_values",
+        "success_response"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getSuccessResponse",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/admin/success-responses/{id}/",
+      "backend_path": "/api/admin/success-responses/<int:pk>/",
+      "view": "apps.form_builder.views.AdminSuccessResponseDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "getSuccessResponses",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/admin/success-responses/",
+      "backend_path": "/api/admin/success-responses/",
+      "view": "apps.form_builder.views.AdminSuccessResponseListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "submitPublicForm",
+      "callers": [
+        "src/components/forms/DynamicPublicForm.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/public/forms/{slug}/submit/",
+      "backend_path": "/api/public/forms/<slug:slug>/submit/",
+      "view": "apps.form_builder.views.PublicFormSubmitView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "access_key"
+      ],
+      "response_fields_consumed": [
+        "initial_values",
+        "success_response"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "updateAdminForm",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/admin/forms/{id}/",
+      "backend_path": "/api/admin/forms/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormTemplateDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderApi.js",
+      "function": "updateSuccessResponse",
+      "callers": [
+        "src/store/useFormBuilderStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/admin/success-responses/{id}/",
+      "backend_path": "/api/admin/success-responses/<int:pk>/",
+      "view": "apps.form_builder.views.AdminSuccessResponseDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "createField",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/admin/forms/{formId}/fields/",
+      "backend_path": "/api/admin/forms/<int:form_id>/fields/",
+      "view": "apps.form_builder.views.AdminFormFieldListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "createOption",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/admin/forms/fields/{fieldId}/options/",
+      "backend_path": "/api/admin/forms/fields/<int:field_id>/options/",
+      "view": "apps.form_builder.views.AdminFormFieldOptionListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "createSection",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/admin/forms/{formId}/sections/",
+      "backend_path": "/api/admin/forms/<int:form_id>/sections/",
+      "view": "apps.form_builder.views.AdminFormSectionListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "deleteField",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/admin/forms/fields/{id}/",
+      "backend_path": "/api/admin/forms/fields/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormFieldDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "deleteOption",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/admin/forms/options/{id}/",
+      "backend_path": "/api/admin/forms/options/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormFieldOptionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "deleteSection",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/admin/forms/sections/{id}/",
+      "backend_path": "/api/admin/forms/sections/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormSectionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "updateField",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/admin/forms/fields/{id}/",
+      "backend_path": "/api/admin/forms/fields/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormFieldDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "updateOption",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/admin/forms/options/{id}/",
+      "backend_path": "/api/admin/forms/options/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormFieldOptionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "formBuilderSectionApi.js",
+      "function": "updateSection",
+      "callers": [
+        "src/pages/dashboard/forms/validation/FormBuilder.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/admin/forms/sections/{id}/",
+      "backend_path": "/api/admin/forms/sections/<int:pk>/",
+      "view": "apps.form_builder.views.AdminFormSectionDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "legalApi.js",
+      "function": "adminLegalCreate",
+      "callers": [
+        "src/pages/dashboard/cms/Legal.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/legal/admin/pages/",
+      "backend_path": "/api/legal/admin/pages/",
+      "view": "apps.legal.views.LegalPageListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "legalApi.js",
+      "function": "adminLegalDelete",
+      "callers": [
+        "src/pages/dashboard/cms/Legal.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/legal/admin/pages/{id}/",
+      "backend_path": "/api/legal/admin/pages/<int:pk>/",
+      "view": "apps.legal.views.LegalPageDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "legalApi.js",
+      "function": "adminLegalEdit",
+      "callers": [
+        "src/pages/dashboard/cms/Legal.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/legal/admin/pages/{id}/",
+      "backend_path": "/api/legal/admin/pages/<int:pk>/",
+      "view": "apps.legal.views.LegalPageDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "legalApi.js",
+      "function": "adminLegalList",
+      "callers": [
+        "src/pages/dashboard/cms/Legal.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/legal/admin/pages/",
+      "backend_path": "/api/legal/admin/pages/",
+      "view": "apps.legal.views.LegalPageListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "legalApi.js",
+      "function": "getPublicLegal",
+      "callers": [
+        "src/pages/public/LegalPage.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/legal/page/{slug}/",
+      "backend_path": "/api/legal/page/<slug:slug>/",
+      "view": "apps.legal.views.PublicLegalPageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminBroadcast",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/messaging/admin/broadcast/",
+      "backend_path": "/api/messaging/admin/broadcast/",
+      "view": "apps.messaging.views.BroadcastEmailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminDeleteSubscriber",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/messaging/admin/subscribers/{id}/",
+      "backend_path": "/api/messaging/admin/subscribers/<int:pk>/",
+      "view": "apps.messaging.views.SubscriberDeleteView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminExportSubscribers",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/subscribers/export/",
+      "backend_path": "/api/messaging/admin/subscribers/export/",
+      "view": "apps.messaging.views.ExportSubscribersCSV",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminGetBroadcastLogs",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/broadcast/logs/",
+      "backend_path": "/api/messaging/admin/broadcast/logs/",
+      "view": "apps.messaging.views.BroadcastLogsListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminGetMessages",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/messages/",
+      "backend_path": "/api/messaging/admin/messages/",
+      "view": "apps.messaging.views.AdminMessagesView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminGetSingleMessage",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/messages/{id}/",
+      "backend_path": "/api/messaging/admin/messages/<int:pk>/",
+      "view": "apps.messaging.views.AdminSingleMessageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminGetSubscribers",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/messaging/admin/subscribers/",
+      "backend_path": "/api/messaging/admin/subscribers/",
+      "view": "apps.messaging.views.SubscribersListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "adminUpdateMessage",
+      "callers": [
+        "src/store/useMessagesStore.js"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/messaging/admin/messages/{id}/",
+      "backend_path": "/api/messaging/admin/messages/<int:pk>/",
+      "view": "apps.messaging.views.AdminSingleMessageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "messagesApi.js",
+      "function": "sendContact",
+      "callers": [
+        "src/store/useContactStore.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/messaging/contact/",
+      "backend_path": "/api/messaging/contact/",
+      "view": "apps.messaging.views.ContactMessageView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "cards",
+        "description_ar",
+        "description_en",
+        "faq_preview",
+        "title_ar",
+        "title_en"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicBlogSettings",
+      "callers": [
+        "src/pages/public/Blog/Blog.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/settings/",
+      "backend_path": "/api/blog/settings/",
+      "view": "apps.blog.views.PublicBlogSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicCategories",
+      "callers": [
+        "src/pages/public/Blog/Blog.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/categories/",
+      "backend_path": "/api/blog/categories/",
+      "view": "apps.blog.views.PublicCategoryListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicFAQ",
+      "callers": [
+        "src/store/useFaqStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/public/faq/",
+      "backend_path": "/api/cms/public/faq/",
+      "view": "apps.cms.views.PublicFAQView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicFooter",
+      "callers": [
+        "src/store/usePublicStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/footer/",
+      "backend_path": "/api/public/footer/",
+      "view": "apps.core.views_public.PublicFooterView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicHeader",
+      "callers": [
+        "src/store/usePublicStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/header/",
+      "backend_path": "/api/public/header/",
+      "view": "apps.core.views_public.PublicHeaderView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicHome",
+      "callers": [
+        "src/store/useCmsStore.js",
+        "src/store/usePublicStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/home/",
+      "backend_path": "/api/public/home/",
+      "view": "apps.cms.views.PublicHomeView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer_columns",
+        "hero"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicPostDetails",
+      "callers": [
+        "src/pages/public/Blog/BlogDetails.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/posts/{slug}/",
+      "backend_path": "/api/blog/posts/<slug:slug>/",
+      "view": "apps.blog.views.PublicBlogDetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicPosts",
+      "callers": [
+        "src/pages/public/Blog/Blog.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/blog/posts/",
+      "backend_path": "/api/blog/posts/",
+      "view": "apps.blog.views.PublicBlogListView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "getPublicSettings",
+      "callers": [
+        "src/store/usePublicStore.js",
+        "src/components/common/WhatsAppFloat.jsx",
+        "src/components/layout/public/Footer.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/public/settings/",
+      "backend_path": "/api/public/settings/",
+      "view": "apps.core.views_public.PublicSiteSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "footer",
+        "phone_whatsapp",
+        "whatsapp",
+        "whatsapp_number"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "publicApi.js",
+      "function": "searchPublic",
+      "callers": [
+        "src/components/layout/public/Navbar.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/cms/public/search/",
+      "backend_path": "/api/cms/public/search/",
+      "view": "apps.cms.views.public_search",
+      "serializer": null,
+      "authentication": [],
+      "permissions": [],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminAllPages",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/seo/admin/all-pages/",
+      "backend_path": "/api/seo/admin/all-pages/",
+      "view": "apps.seo.views.AllPagesForSEO",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminCreateSEO",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/seo/admin/pages/",
+      "backend_path": "/api/seo/admin/pages/",
+      "view": "apps.seo.views.PageSEOListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminDeleteSEO",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/seo/admin/pages/{id}/",
+      "backend_path": "/api/seo/admin/pages/<int:pk>/",
+      "view": "apps.seo.views.PageSEODetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminSEOList",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/seo/admin/pages/",
+      "backend_path": "/api/seo/admin/pages/",
+      "view": "apps.seo.views.PageSEOListCreateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminUpdateSEO",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/seo/admin/pages/{id}/",
+      "backend_path": "/api/seo/admin/pages/<int:pk>/",
+      "view": "apps.seo.views.PageSEODetailView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "seoApi.js",
+      "function": "adminGetDefaultSEO",
+      "callers": [
+        "src/pages/dashboard/cms/SEO.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/seo/admin/default/",
+      "backend_path": "/api/seo/admin/default/",
+      "view": "apps.seo.views.DefaultSEOView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "createMainService",
+      "callers": [
+        "src/pages/dashboard/services/MainServices.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/main-services/",
+      "backend_path": "/api/services/admin/main-services/",
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "serializer": "apps.services.serializers.MainServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "createService",
+      "callers": [
+        "src/pages/dashboard/services/Services.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/services/",
+      "backend_path": "/api/services/admin/services/",
+      "view": "apps.services.views.AdminServiceViewSet",
+      "serializer": "apps.services.serializers.ServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "createServiceRequestAccessLink",
+      "callers": [
+        "src/pages/dashboard/services/requests/hooks/useRequestAccess.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/access-links/create/",
+      "backend_path": "/api/services/admin/service-advisory-requests/<int:request_id>/access-links/create/",
+      "view": "apps.services.access.views.AdminCreateAccessLinkView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail",
+        "non_field_errors"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "createServiceSection",
+      "callers": [
+        "src/pages/dashboard/services/ServiceSections.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/service-sections/",
+      "backend_path": "/api/services/admin/service-sections/",
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "serializer": "apps.services.serializers.ServiceSectionSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "createServicesPageCMS",
+      "callers": [
+        "src/pages/dashboard/services/ServicesPageCMS.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/services-page/",
+      "backend_path": "/api/services/admin/services-page/",
+      "view": "apps.services.views.AdminServicePageCMSViewSet",
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "deleteMainService",
+      "callers": [
+        "src/pages/dashboard/services/MainServices.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/main-services/{id}/",
+      "backend_path": "/api/services/admin/main-services/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "serializer": "apps.services.serializers.MainServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "deleteService",
+      "callers": [
+        "src/pages/dashboard/services/Services.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/services/{id}/",
+      "backend_path": "/api/services/admin/services/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceViewSet",
+      "serializer": "apps.services.serializers.ServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "deleteServiceAdvisoryRequest",
+      "callers": [
+        "src/api/servicesApi.js (compatibility alias)"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/",
+      "backend_path": "/api/services/admin/service-advisory-requests/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "deleteServiceRequest",
+      "callers": [
+        "src/pages/dashboard/services/requests/ServiceRequests.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/",
+      "backend_path": "/api/services/admin/service-advisory-requests/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "deleteServiceSection",
+      "callers": [
+        "src/pages/dashboard/services/ServiceSections.jsx"
+      ],
+      "method": "DELETE",
+      "frontend_path": "/services/admin/service-sections/{id}/",
+      "backend_path": "/api/services/admin/service-sections/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "serializer": "apps.services.serializers.ServiceSectionSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200/204 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getEditableRequestSnapshot",
+      "callers": [
+        "src/pages/public/RequestAccess/RequestAccessPage.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/request-access/{key}/",
+      "backend_path": "/api/services/public/request-access/<str:public_key>/",
+      "view": "apps.services.access.views.EditableSubmissionSnapshotView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "access_token",
+        "cooldown_seconds",
+        "detail",
+        "masked_destination",
+        "message",
+        "remaining_seconds"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getMainServices",
+      "callers": [
+        "src/pages/dashboard/services/MainServices.jsx",
+        "src/pages/dashboard/services/Services.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/main-services/",
+      "backend_path": "/api/services/admin/main-services/",
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "serializer": "apps.services.serializers.MainServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getPublicCareers",
+      "callers": [
+        "src/components/forms/DynamicFieldRenderer.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/careers/jobs/",
+      "backend_path": "/api/services/public/careers/jobs/",
+      "view": "apps.services.views.PublicCareerJobsViewSet",
+      "serializer": "apps.services.serializers.CareerJobSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getPublicMainServices",
+      "callers": [
+        "src/pages/public/Services/Services.jsx",
+        "src/components/forms/DynamicFieldRenderer.jsx",
+        "src/components/forms/fields/ServicesPickerField.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/main-services/",
+      "backend_path": "/api/services/public/main-services/",
+      "view": "apps.services.views.PublicMainServiceViewSet",
+      "serializer": "apps.services.serializers.MainServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getPublicServices",
+      "callers": [
+        "src/pages/public/Services/Services.jsx",
+        "src/components/forms/DynamicFieldRenderer.jsx",
+        "src/components/forms/fields/ServicesPickerField.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/services/",
+      "backend_path": "/api/services/public/services/",
+      "view": "apps.services.views.PublicServiceViewSet",
+      "serializer": "apps.services.serializers.ServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getPublicServicesPage",
+      "callers": [
+        "src/pages/public/Services/Services.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/public/services-page/",
+      "backend_path": "/api/services/public/services-page/",
+      "view": "apps.services.views.PublicServicePageCMSViewSet",
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getRequestAccessLogs",
+      "callers": [
+        "src/pages/dashboard/services/requests/components/RequestAccessLogs.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/logs/",
+      "backend_path": "/api/services/admin/service-advisory-requests/<int:request_id>/logs/",
+      "view": "apps.services.access.views.AdminAccessActivityLogsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServiceAdvisoryRequest",
+      "callers": [
+        "src/pages/dashboard/services/requests/ServiceRequests.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/",
+      "backend_path": "/api/services/admin/service-advisory-requests/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServiceAdvisoryRequests",
+      "callers": [
+        "src/api/servicesApi.js (compatibility alias)"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-advisory-requests/",
+      "backend_path": "/api/services/admin/service-advisory-requests/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServiceRequestAccessLinks",
+      "callers": [
+        "src/pages/dashboard/services/requests/hooks/useRequestAccess.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/access-links/",
+      "backend_path": "/api/services/admin/service-advisory-requests/<int:request_id>/access-links/",
+      "view": "apps.services.access.views.AdminRequestAccessLinksView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "detail",
+        "non_field_errors"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServiceRequests",
+      "callers": [
+        "src/pages/dashboard/services/requests/ServiceRequests.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-advisory-requests/",
+      "backend_path": "/api/services/admin/service-advisory-requests/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServiceSections",
+      "callers": [
+        "src/pages/dashboard/services/ServiceSections.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/service-sections/",
+      "backend_path": "/api/services/admin/service-sections/",
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "serializer": "apps.services.serializers.ServiceSectionSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServices",
+      "callers": [
+        "src/pages/dashboard/services/Services.jsx",
+        "src/pages/dashboard/services/ServiceSections.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/services/",
+      "backend_path": "/api/services/admin/services/",
+      "view": "apps.services.views.AdminServiceViewSet",
+      "serializer": "apps.services.serializers.ServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getServicesPageCMS",
+      "callers": [
+        "src/pages/dashboard/services/ServicesPageCMS.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/services-page/",
+      "backend_path": "/api/services/admin/services-page/",
+      "view": "apps.services.views.AdminServicePageCMSViewSet",
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "getSubmissionEditHistory",
+      "callers": [
+        "src/pages/dashboard/services/requests/components/RequestEditHistory.jsx"
+      ],
+      "method": "GET",
+      "frontend_path": "/services/admin/submissions/{id}/history/",
+      "backend_path": "/api/services/admin/submissions/<int:submission_id>/history/",
+      "view": "apps.services.access.views.AdminSubmissionEditHistoryView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "importServicesExcel",
+      "callers": [
+        "src/pages/dashboard/services/ImportServices.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/import-services/",
+      "backend_path": "/api/services/admin/import-services/",
+      "view": "apps.services.views.AdminImportServicesView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail",
+        "error"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "regenerateServiceRequestAccessLink",
+      "callers": [
+        "src/pages/dashboard/services/requests/hooks/useRequestAccess.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/request-access-links/{id}/regenerate/",
+      "backend_path": "/api/services/admin/request-access-links/<int:link_id>/regenerate/",
+      "view": "apps.services.access.views.AdminRegenerateAccessLinkView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail",
+        "non_field_errors"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "revokeServiceRequestAccessLink",
+      "callers": [
+        "src/pages/dashboard/services/requests/hooks/useRequestAccess.js"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/admin/request-access-links/{id}/revoke/",
+      "backend_path": "/api/services/admin/request-access-links/<int:link_id>/revoke/",
+      "view": "apps.services.access.views.AdminRevokeAccessLinkView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail",
+        "non_field_errors"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "sendRequestOTP",
+      "callers": [
+        "src/pages/public/RequestAccess/RequestAccessPage.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/public/request-access/send-otp/",
+      "backend_path": "/api/services/public/request-access/send-otp/",
+      "view": "apps.services.access.views.SendOTPView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "public_key"
+      ],
+      "response_fields_consumed": [
+        "access_token",
+        "cooldown_seconds",
+        "detail",
+        "masked_destination",
+        "message",
+        "remaining_seconds"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateAdminSubmission",
+      "callers": [
+        "src/pages/dashboard/services/requests/components/RequestDetailsModal.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/submissions/{id}/update/",
+      "backend_path": "/api/services/admin/submissions/<int:submission_id>/update/",
+      "view": "apps.services.access.views.AdminEditableSubmissionUpdateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateEditableRequest",
+      "callers": [
+        "src/pages/public/RequestAccess/RequestAccessPage.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/public/request-access/{key}/update/",
+      "backend_path": "/api/services/public/request-access/<str:public_key>/update/",
+      "view": "apps.services.access.views.EditableSubmissionUpdateView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "access_token",
+        "cooldown_seconds",
+        "detail",
+        "masked_destination",
+        "message",
+        "remaining_seconds"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateMainService",
+      "callers": [
+        "src/pages/dashboard/services/MainServices.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/main-services/{id}/",
+      "backend_path": "/api/services/admin/main-services/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "serializer": "apps.services.serializers.MainServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateService",
+      "callers": [
+        "src/pages/dashboard/services/Services.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/services/{id}/",
+      "backend_path": "/api/services/admin/services/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceViewSet",
+      "serializer": "apps.services.serializers.ServiceSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateServiceAdvisoryRequest",
+      "callers": [
+        "src/pages/dashboard/services/requests/components/RequestStatusActions.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/service-advisory-requests/{id}/",
+      "backend_path": "/api/services/admin/service-advisory-requests/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "response.data"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateServiceSection",
+      "callers": [
+        "src/pages/dashboard/services/ServiceSections.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/service-sections/{id}/",
+      "backend_path": "/api/services/admin/service-sections/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "serializer": "apps.services.serializers.ServiceSectionSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "updateServicesPageCMS",
+      "callers": [
+        "src/pages/dashboard/services/ServicesPageCMS.jsx"
+      ],
+      "method": "PATCH",
+      "frontend_path": "/services/admin/services-page/{id}/",
+      "backend_path": "/api/services/admin/services-page/(?P<pk>[/.]+)/",
+      "view": "apps.services.views.AdminServicePageCMSViewSet",
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer",
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "results"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "servicesApi.js",
+      "function": "verifyRequestOTP",
+      "callers": [
+        "src/pages/public/RequestAccess/RequestAccessPage.jsx"
+      ],
+      "method": "POST",
+      "frontend_path": "/services/public/request-access/verify-otp/",
+      "backend_path": "/api/services/public/request-access/verify-otp/",
+      "view": "apps.services.access.views.VerifyOTPView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "AllowAny"
+      ],
+      "content_type": "application/json",
+      "request_fields": [
+        "code",
+        "public_key"
+      ],
+      "response_fields_consumed": [
+        "access_token",
+        "cooldown_seconds",
+        "detail",
+        "masked_destination",
+        "message",
+        "remaining_seconds"
+      ],
+      "expected_status": "200/201 per implementation",
+      "result": "MATCH"
+    },
+    {
+      "module": "settingsApi.js",
+      "function": "getSettings",
+      "callers": [
+        "src/store/useSettingsStore.js"
+      ],
+      "method": "GET",
+      "frontend_path": "/settings/",
+      "backend_path": "/api/settings/",
+      "view": "apps.settings_app.views.SiteSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "none",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "detail"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    },
+    {
+      "module": "settingsApi.js",
+      "function": "updateSettings",
+      "callers": [
+        "src/store/useSettingsStore.js"
+      ],
+      "method": "PUT",
+      "frontend_path": "/settings/",
+      "backend_path": "/api/settings/",
+      "view": "apps.settings_app.views.SiteSettingsView",
+      "serializer": null,
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "content_type": "multipart/form-data",
+      "request_fields": [
+        "caller-provided payload"
+      ],
+      "response_fields_consumed": [
+        "detail"
+      ],
+      "expected_status": "200",
+      "result": "MATCH"
+    }
+  ],
+  "backend_routes": [
+    {
+      "path": "/api/public/settings/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicSiteSettingsView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/header/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicHeaderView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/admin/dashboard-stats/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.DashboardStatsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/hero/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicHeroView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/footer/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicFooterView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/home/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicHomeView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/page/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/legal/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicLegalPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/blog/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicBlogListView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/blog/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicBlogDetailView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/team/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicTeamView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/seo/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicSEOView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/seo/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.core.views_public.PublicSEOView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/settings/",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "view": "apps.settings_app.views.SiteSettingsView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/settings/email/",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "view": "apps.settings_app.views.EmailSettingsView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/settings/email/test/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.settings_app.views.EmailSMTPTestView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/contact/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.messaging.views.ContactMessageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/subscribe/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.messaging.views.SubscriberView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/messages/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.messaging.views.AdminMessagesView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/messages/<int:pk>/",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.messaging.views.AdminSingleMessageView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/subscribers/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.messaging.views.SubscribersListView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/subscribers/<int:pk>/",
+      "methods": [
+        "DELETE"
+      ],
+      "view": "apps.messaging.views.SubscriberDeleteView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/subscribers/export/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.messaging.views.ExportSubscribersCSV",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/broadcast/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.messaging.views.BroadcastEmailView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/broadcast/logs/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.messaging.views.BroadcastLogsListView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/messaging/admin/email-templates/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.messaging.views.EmailTemplateView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/accounts/login/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.accounts.views.LoginView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/accounts/refresh/",
+      "methods": [
+        "POST"
+      ],
+      "view": "rest_framework_simplejwt.views.TokenRefreshView",
+      "permissions": [],
+      "authentication": [],
+      "serializer": null
+    },
+    {
+      "path": "/api/accounts/users/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.accounts.views.UsersListView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/accounts/users/create/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.accounts.views.CreateUserView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/accounts/users/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.accounts.views.UserDetailView",
+      "permissions": [
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/hero/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicHeroView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/page/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/home/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicHomeView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/header/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicHeaderView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/search/",
+      "methods": [],
+      "view": "apps.cms.views.public_search",
+      "permissions": [],
+      "authentication": [],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/about/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicAboutView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/heroes/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.HeroListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/heroes/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.HeroDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/hero-media/<int:hero_id>/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.HeroMediaListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/hero-media/item/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.HeroMediaDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/pages/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.PageListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/pages/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.PageDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/home-sections/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.HomeSectionListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/home-sections/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.HomeSectionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/header/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.HeaderLinkListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/header/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.HeaderLinkDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/columns/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.FooterColumnListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/columns/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.FooterColumnDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/footer-links/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.FooterLinkListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/footer-links/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.FooterLinkDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/faq/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicFAQView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/faq/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.FAQListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/faq/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.FAQDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/contact-page/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicContactPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/contact/page/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.ContactPageSettingsAdminView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/faq-categories/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.FAQCategoryListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/faq-categories/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.FAQCategoryDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/contact/faq-preview/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.ContactFAQPreviewView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/contact/faq-preview/toggle/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.ContactFAQPreviewToggleView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/contact/cards/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.ContactCardListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/contact/cards/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.ContactCardDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/stats/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.AdminAboutStatListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/stats/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutStatDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/posts/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.AdminAboutPostListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/posts/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutPostDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/sections/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.AdminAboutSectionListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/sections/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutSectionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/icons/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.AdminAboutIconListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/icons/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutIconDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/partners/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.cms.views.AdminAboutPartnerListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/about/partners/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminAboutPartnerDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/content/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicPageContentView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/page-content/<slug:slug>/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.cms.views.AdminPageContentView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/footer/settings/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.FooterSettingsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/footer/cta/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.cms.views.FooterCTAListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/admin/footer/cta/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.cms.views.FooterCTADetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/cms/public/footer/settings/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.cms.views.PublicFooterSettingsView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/legal/page/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.legal.views.PublicLegalPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/legal/admin/pages/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.legal.views.LegalPageListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/legal/admin/pages/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.legal.views.LegalPageDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/settings/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.blog.views.PublicBlogSettingsView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/categories/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.blog.views.PublicCategoryListView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/tags/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.blog.views.PublicTagListView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/posts/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.blog.views.PublicBlogListView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/posts/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.blog.views.PublicBlogDetailView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/categories/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.blog.views.CategoryListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/categories/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.blog.views.CategoryDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/tags/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.blog.views.TagListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/tags/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.blog.views.TagDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/posts/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.blog.views.BlogListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/posts/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.blog.views.BlogDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/blog/admin/settings/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.blog.views.BlogSettingsUpdateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/team/public/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.team.views.PublicTeamView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/team/public/page/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.team.views.PublicTeamPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/team/admin/members/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.team.views.TeamListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/team/admin/members/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.team.views.TeamDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/team/admin/page/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.team.views.TeamPageAdminView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/main-services/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicMainServiceViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.MainServiceSerializer"
+    },
+    {
+      "path": "/api/services/public/main-services/(?P<slug>[/.]+)/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicMainServiceViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.MainServiceSerializer"
+    },
+    {
+      "path": "/api/services/public/services/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicServiceViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSerializer"
+    },
+    {
+      "path": "/api/services/public/services/(?P<slug>[/.]+)/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicServiceViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSerializer"
+    },
+    {
+      "path": "/api/services/public/services-page/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicServicePageCMSViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer"
+    },
+    {
+      "path": "/api/services/public/services-page/(?P<pk>[/.]+)/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicServicePageCMSViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer"
+    },
+    {
+      "path": "/api/services/admin/main-services/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.MainServiceSerializer"
+    },
+    {
+      "path": "/api/services/admin/main-services/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminMainServiceViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.MainServiceSerializer"
+    },
+    {
+      "path": "/api/services/admin/services/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminServiceViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSerializer"
+    },
+    {
+      "path": "/api/services/admin/services/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminServiceViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-sections/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSectionSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-sections/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminServiceSectionViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceSectionSerializer"
+    },
+    {
+      "path": "/api/services/admin/services-page/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminServicePageCMSViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer"
+    },
+    {
+      "path": "/api/services/admin/services-page/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminServicePageCMSViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServicePageCMSSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-advisory-page/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminServiceAdvisoryPageViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceAdvisoryPageSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-advisory-page/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminServiceAdvisoryPageViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceAdvisoryPageSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-advisory-requests/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer"
+    },
+    {
+      "path": "/api/services/admin/service-advisory-requests/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminServiceAdvisoryRequestViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.ServiceAdvisoryRequestSerializer"
+    },
+    {
+      "path": "/api/services/public/careers/jobs/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicCareerJobsViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerJobSerializer"
+    },
+    {
+      "path": "/api/services/public/careers/jobs/(?P<pk>[/.]+)/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicCareerJobsViewSet",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerJobSerializer"
+    },
+    {
+      "path": "/api/services/admin/careers/jobs/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerJobSerializer"
+    },
+    {
+      "path": "/api/services/admin/careers/jobs/(?P<pk>[/.]+)/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "PUT"
+      ],
+      "view": "apps.services.views.AdminCareerJobsViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerJobSerializer"
+    },
+    {
+      "path": "/api/services/admin/careers/applications/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.AdminCareerApplicationsViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerApplicationSerializer"
+    },
+    {
+      "path": "/api/services/admin/careers/applications/(?P<pk>[/.]+)/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.AdminCareerApplicationsViewSet",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": "apps.services.serializers.CareerApplicationSerializer"
+    },
+    {
+      "path": "/api/services/",
+      "methods": [
+        "GET"
+      ],
+      "view": "rest_framework.routers.APIRootView",
+      "permissions": [
+        "IsAuthenticated"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/appointments/page/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.appointments.public_views.PublicAppointmentPageView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/appointments/settings/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.appointments.public_views.PublicAppointmentSettingsView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/appointments/slots/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.appointments.public_views.PublicAvailableSlotsView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/page/",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminAppointmentPageView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/settings/",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSettingsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/slots/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSlotsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/slots/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminAppointmentSlotDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/bookings/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminAppointmentBookingsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/slots/generate/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminGenerateSlotsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/bookings/<int:pk>/cancel/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminCancelBookingView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/appointments/bookings/<int:pk>/status/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.services.appointments.admin_views.AdminUpdateBookingStatusView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/clients/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.clients.views.AdminClientsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/clients/<int:pk>/files/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.services.clients.views.AdminClientFilesView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/import-services/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.views.AdminImportServicesView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/request-access/send-otp/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.access.views.SendOTPView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/request-access/verify-otp/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.access.views.VerifyOTPView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/request-access/<str:public_key>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.access.views.EditableSubmissionSnapshotView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/public/request-access/<str:public_key>/update/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.services.access.views.EditableSubmissionUpdateView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/service-advisory-requests/<int:request_id>/access-links/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.access.views.AdminRequestAccessLinksView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/service-advisory-requests/<int:request_id>/access-links/create/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.access.views.AdminCreateAccessLinkView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/request-access-links/<int:link_id>/revoke/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.access.views.AdminRevokeAccessLinkView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/request-access-links/<int:link_id>/regenerate/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.services.access.views.AdminRegenerateAccessLinkView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/submissions/<int:submission_id>/update/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.services.access.views.AdminEditableSubmissionUpdateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/submissions/<int:submission_id>/history/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.access.views.AdminSubmissionEditHistoryView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/admin/service-advisory-requests/<int:request_id>/logs/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.access.views.AdminAccessActivityLogsView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/services/services/filter/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.services.views.PublicServicesByMainServiceView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/public/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.seo.views.PublicSEOView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/public/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.seo.views.PublicSEOView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/admin/default/",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "view": "apps.seo.views.DefaultSEOView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/admin/pages/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.seo.views.PageSEOListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/admin/pages/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.seo.views.PageSEODetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/seo/admin/all-pages/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.seo.views.AllPagesForSEO",
+      "permissions": [
+        "IsAuthenticated",
+        "IsAdminOrSuper"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/forms/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.form_builder.views.PublicFormListView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/forms/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.form_builder.views.PublicFormDetailView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/forms/<slug:slug>/submit/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.PublicFormSubmitView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/submissions/<str:reference>/edit/",
+      "methods": [
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.PublicSubmissionUpdateView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminFormTemplateListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminFormTemplateDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/<int:form_id>/sections/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminFormSectionListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/sections/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminFormSectionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/<int:form_id>/fields/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminFormFieldListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/fields/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminFormFieldDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/fields/<int:field_id>/options/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminFormFieldOptionListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/forms/options/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminFormFieldOptionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/success-responses/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminSuccessResponseListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/success-responses/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminSuccessResponseDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/form-submissions/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.form_builder.views.AdminFormSubmissionListView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/form-submissions/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminFormSubmissionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/forms/access/send-otp/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.PublicFormSendOTPView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/forms/access/verify-otp/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.PublicFormVerifyOTPView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/public/info-modals/<slug:slug>/",
+      "methods": [
+        "GET"
+      ],
+      "view": "apps.form_builder.views.PublicInfoModalDetailView",
+      "permissions": [
+        "AllowAny"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/info-modals/",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminInfoModalListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/info-modals/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "GET",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminInfoModalDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/info-modals/<int:modal_id>/sections/",
+      "methods": [
+        "POST"
+      ],
+      "view": "apps.form_builder.views.AdminInfoModalSectionListCreateView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    },
+    {
+      "path": "/api/admin/info-modal-sections/<int:pk>/",
+      "methods": [
+        "DELETE",
+        "PATCH"
+      ],
+      "view": "apps.form_builder.views.AdminInfoModalSectionDetailView",
+      "permissions": [
+        "IsAuthenticated",
+        "IsEditorOrAbove"
+      ],
+      "authentication": [
+        "JWTAuthentication"
+      ],
+      "serializer": null
+    }
+  ]
+}
