@@ -72,7 +72,7 @@ Use non-default secrets; keep `DEBUG=False`; restrict `ALLOWED_HOSTS`, CORS, and
 
 ## Known Technical Debt
 
-- The CRA 5 frontend currently reports 30 npm advisories after safe non-forced transitive updates: 9 low, 7 moderate, 14 high, and 0 critical. Most are inherited by the build, development-server, Jest/jsdom, Workbox, and webpack toolchain; React Router v6 also has direct runtime advisories whose offered fix is a v7 major upgrade. Do not report these as zero known frontend vulnerabilities. A CRA-to-Vite/current-router migration is recommended as a separate tested project.
+- As of August 27, 2026, the frontend reports 31 npm advisories: 9 low, 7 moderate, 15 high, and 0 critical. Most are inherited by the CRA build, development-server, Jest/jsdom, Workbox, and webpack toolchain. React Router v6 has direct runtime advisories whose offered fix is a v7 major upgrade, and SunEditor has a direct high-severity embed-plugin DOM-XSS advisory whose offered fix is a semver-major upgrade. Do not report these as zero known frontend vulnerabilities. CRA/current-router and SunEditor major upgrades require separate regression-tested projects.
 - Frontend JWTs use local storage, so the residual impact of any future XSS defect is higher; maintain the sanitizer and avoid unsafe script injection.
 - Automated tests cover critical HTTP semantics, routing, uploads, sanitization, and boot smoke paths, but are not a full end-to-end browser suite.
 
