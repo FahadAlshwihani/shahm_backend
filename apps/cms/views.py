@@ -11,6 +11,7 @@ from apps.blog.models import BlogPost
 from apps.services.models import Service
 
 from apps.accounts.permissions import IsEditorOrAbove
+from common.throttling import rate_limited
 
 from .models import (
     HeroSection,
@@ -504,6 +505,7 @@ class FooterLinkDetailView(APIView):
     # ================= Search =================
 
 
+@rate_limited("search")
 def public_search(request):
     q = request.GET.get("q", "").strip()
     lang = request.GET.get("lang", "ar")
