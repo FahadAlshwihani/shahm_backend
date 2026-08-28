@@ -165,9 +165,44 @@ Current tests cover authentication and role boundaries, URL/security contracts, 
 
 Migration `cms.0022` is required by the current model state and changes only the Arabic and English `ContactCard.subtitle` fields from `CharField(max_length=255)` to `TextField(blank=True)`. Its source file is `apps/cms/migrations/0022_alter_contactcard_subtitle_ar_and_more.py`; its Django migration label remains `cms.0022`. Apply it with the normal `python manage.py migrate` deployment step. A rollback to `cms.0021` requires checking for values longer than 255 characters first.
 
+## Rate Limiting and Account Lockout
+
+`ScopedRateThrottle` is registered as the default throttle class. It limits only
+views that declare `throttle_scope`, so no endpoint is limited implicitly. The
+limited scopes are `login`, `otp`, `otp_send`, `otp_verify`, `search`,
+`contact`, `subscribe`, `form_submit`, and `public_edit`. Every rate is
+overridable per deployment through `THROTTLE_<SCOPE>` without a code change.
+`/api/cms/public/search/` is a plain Django view and uses the equivalent
+`common.throttling.rate_limited` decorator against the same rate table.
+
+Sign-in is limited twice: per address by the `login` scope, and per account by
+a lockout that blocks an account for `LOGIN_LOCKOUT_SECONDS` after
+`LOGIN_FAILURE_LIMIT` consecutive failures, answering `429`. A successful
+sign-in clears the counter. Counting per account rather than per address keeps
+one mistyped password from locking out an entire office.
+
+Both mechanisms count in the default cache. `CACHE_URL` must therefore point at
+a shared backend on any deployment that runs more than one worker process;
+`check --deploy` raises `shahm.W001` while it does not.
+
+## Logging and Error Responses
+
+`LOGGING` writes to standard output at `LOG_LEVEL`, and every line carries the
+identifier of the request being served. `ErrorLoggingMiddleware` and
+`common.exceptions.custom_exception_handler` log the exception in full and
+return `"error": "internal_error"` with that identifier in `request_id` and in
+the `X-Request-ID` response header. Exception text is never returned to a
+client.
+
 ## Security Notes
 
 Keep secrets outside Git, initial-admin setup disabled, JWT role/object checks intact, and uploads non-executable. Review dependencies and `check --deploy` for every release.
+
+Roles are ranked `viewer` < `editor` < `admin` < `super_admin`. An account may
+only assign roles at or below its own rank and only administer accounts at or
+below its own rank, so an `admin` can no longer create, promote, edit, or
+delete a `super_admin`. No account may delete itself or change its own role,
+and the last active `super_admin` can be neither deleted nor deactivated.
 
 ## Maintenance Notes
 
