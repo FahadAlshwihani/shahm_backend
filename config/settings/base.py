@@ -117,12 +117,23 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ),
 
-    "DEFAULT_THROTTLE_CLASSES": [],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.ScopedRateThrottle",
+    ],
 
+    # ScopedRateThrottle only limits views that declare ``throttle_scope``,
+    # so no endpoint is limited implicitly. Every rate may be overridden per
+    # deployment with THROTTLE_<SCOPE> without a code change.
     "DEFAULT_THROTTLE_RATES": {
-        "otp": "5/min",
-        "login": "10/min",
-        "search": "30/min",
+        "otp": env.str("THROTTLE_OTP", default="5/min"),
+        "otp_send": env.str("THROTTLE_OTP_SEND", default="5/min"),
+        "otp_verify": env.str("THROTTLE_OTP_VERIFY", default="10/min"),
+        "login": env.str("THROTTLE_LOGIN", default="10/min"),
+        "search": env.str("THROTTLE_SEARCH", default="30/min"),
+        "contact": env.str("THROTTLE_CONTACT", default="5/min"),
+        "subscribe": env.str("THROTTLE_SUBSCRIBE", default="5/min"),
+        "form_submit": env.str("THROTTLE_FORM_SUBMIT", default="10/min"),
+        "public_edit": env.str("THROTTLE_PUBLIC_EDIT", default="10/min"),
     },
 
     "EXCEPTION_HANDLER": "common.exceptions.custom_exception_handler",
@@ -145,6 +156,16 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 
 }
+
+# ===========================
+# LOGIN LOCKOUT
+# ===========================
+
+# Consecutive failed sign-in attempts for one account before that account is
+# locked for LOGIN_LOCKOUT_SECONDS. Counted per account, not per address, so a
+# shared office address is never locked out by one mistyped password.
+LOGIN_FAILURE_LIMIT = env.int("LOGIN_FAILURE_LIMIT", default=5)
+LOGIN_LOCKOUT_SECONDS = env.int("LOGIN_LOCKOUT_SECONDS", default=900)
 
 # ===========================
 # DATABASE
@@ -221,6 +242,9 @@ CORS_ALLOW_HEADERS = list(
                          "x-access-token",
                      ]
 
+# Lets the dashboard show the identifier that server errors are logged under.
+CORS_EXPOSE_HEADERS = ["X-Request-ID"]
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FRONTEND_URL = env("FRONTEND_URL")
@@ -234,10 +258,58 @@ ENABLE_INITIAL_ADMIN_SETUP = env.bool(
     default=False,
 )
 
+# Rate limiting and lockout counters live in this cache. A per-process cache
+# counts them separately in every worker, so multi-worker deployments must set
+# CACHE_URL to a shared backend. ``check --deploy`` warns when they do not.
 CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-    }
+    "default": env.cache("CACHE_URL", default="locmemcache://"),
+}
+
+# ===========================
+# LOGGING
+# ===========================
+
+LOG_LEVEL = env.str("LOG_LEVEL", default="INFO")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "request_id": {
+            "()": "common.logging.RequestIdFilter",
+        },
+    },
+    "formatters": {
+        "standard": {
+            "format": (
+                "{asctime} {levelname} {name} request={request_id} {message}"
+            ),
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+            "filters": ["request_id"],
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": LOG_LEVEL,
+    },
+    "loggers": {
+        "django.security": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "shahm": {
+            "handlers": ["console"],
+            "level": LOG_LEVEL,
+            "propagate": False,
+        },
+    },
 }
 
 STATICFILES_DIRS = [

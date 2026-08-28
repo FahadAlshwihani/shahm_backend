@@ -1,12 +1,27 @@
-import traceback
+import logging
+
 from django.http import JsonResponse
 from django.utils import timezone
 from apps.core.models import Visit
+
+from common.logging import (
+    get_request_id,
+    new_request_id,
+    reset_request_id,
+    set_request_id,
+)
+
+logger = logging.getLogger("shahm.request")
 
 
 class ErrorLoggingMiddleware:
     """
     Middleware يسجل الأخطاء ويرجع JSON نظيف
+
+    The exception text is written to the application log only. The client
+    receives a stable error code and the request identifier that the log entry
+    carries, so support can trace a failure without internal details leaving
+    the server.
     """
 
     def __init__(self, get_response):
@@ -14,17 +29,29 @@ class ErrorLoggingMiddleware:
 
     def __call__(self, request):
 
+        token = set_request_id(new_request_id())
+
         try:
-            return self.get_response(request)
+            response = self.get_response(request)
 
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
+            logger.exception(
+                "Unhandled error while serving %s %s",
+                request.method,
+                request.path,
+            )
 
-            return JsonResponse({
+            response = JsonResponse({
                 "success": False,
                 "message": "Internal server error",
-                "error": str(e)
+                "error": "internal_error",
+                "request_id": get_request_id(),
             }, status=500)
+
+        response["X-Request-ID"] = get_request_id()
+        reset_request_id(token)
+
+        return response
 
 
 class VisitorTrackingMiddleware:

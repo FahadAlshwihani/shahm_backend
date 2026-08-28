@@ -14,8 +14,9 @@ class AuthenticationContractTests(SimpleTestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
 
+    @patch("apps.accounts.views.authenticate", return_value=None)
     @patch("apps.accounts.views.User.objects.filter")
-    def test_invalid_login_returns_401(self, user_filter):
+    def test_invalid_login_returns_401(self, user_filter, _authenticate):
         user_filter.return_value.first.return_value = None
         request = self.factory.post(
             "/api/accounts/login/",

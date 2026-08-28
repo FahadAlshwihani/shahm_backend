@@ -25,6 +25,7 @@ from integrations.email.services import (
 # =========================
 class ContactMessageView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = "contact"
 
     def post(self, request):
         serializer = ContactMessageSerializer(data=request.data)
@@ -87,6 +88,7 @@ class ContactMessageView(APIView):
 # =========================
 class SubscriberView(APIView):
     permission_classes = [AllowAny]
+    throttle_scope = "subscribe"
 
     def post(self, request):
         email = request.data.get("email")

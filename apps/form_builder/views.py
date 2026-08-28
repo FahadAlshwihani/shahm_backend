@@ -592,6 +592,7 @@ class PublicFormDetailView(APIView):
 class PublicFormSubmitView(APIView):
     permission_classes = [AllowAny]
     parser_classes = [JSONParser, MultiPartParser, FormParser]
+    throttle_scope = "form_submit"
 
     def post(self, request, slug):
 
@@ -771,6 +772,7 @@ class PublicFormSubmitView(APIView):
 class PublicSubmissionUpdateView(APIView):
     permission_classes = [AllowAny]
     parser_classes = [JSONParser, MultiPartParser, FormParser]
+    throttle_scope = "public_edit"
 
     def patch(self, request, reference):
 
